@@ -13,9 +13,9 @@ var i=0;
 
 for (i=0; i<=15; i++) {
     if (i%2===0) {
-        console.log(i + " is even")
+        console.log(i + " is even");
     } else {
-        console.log(i + " is odd")
+        console.log(i + " is odd");
     }
 }
 
@@ -49,7 +49,7 @@ var x = ['1', 'A', 'B', "c", "r", true, NaN, undefined]; */
 var x = ['1', 'A', 'B', "c", "r", true, NaN, undefined], i=0, string="";
 
 for (i=0; i < x.length; i++) {
-    string += x[i]
+    string += x[i];
 }
 console.log(string)
 
@@ -65,7 +65,7 @@ var a = [
 var a = [ [1, 2, 1, 24], [8, 11, 9, 4], [7, 0, 7, 27] ], i=0;
 
 for (i=0; i < a.length; i++) {   
-    console.log(a[i])
+    console.log(a[i]);
 }
 
 
@@ -73,7 +73,7 @@ for (i=0; i < a.length; i++) {
 
 var i=0, sum=0;
 for (i=1; i<=20; i++) {
-    sum += i*i
+    sum += i*i;
 }
 console.log(sum)
 
@@ -138,7 +138,7 @@ for (i=1; i<=100; i++) {
     div5 = i%5;
 
     if ((div3==0) && (div5==0)) {
-        console.log("FizzBuzz")
+        console.log("FizzBuzz");
     } else if (div3===0) {
         console.log("Fizz");
     } else if (div5===0) {
