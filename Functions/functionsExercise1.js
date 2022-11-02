@@ -115,6 +115,7 @@ console.log(g)
 // Write a program that calculates a number of digits of a given number.
 
 function numOfDigits(a) {
+    
     var result = 0;
 
     if (a >= 1) ++result;
@@ -130,13 +131,14 @@ function numOfDigits(a) {
   console.log(f)
 
 
-  /* Write a program that calculates a number of appearances of a given number in a
+/* Write a program that calculates a number of appearances of a given number in a
 given array.
 Inputs: a = [2, 4, 7, 8, 7, 7, 1], e = 7
 Result: 3  
 */
 
 function numOfAppear(a, e) {
+    
     var result = 0;
 
     for (var i = 0; i < a.length; i++) {
@@ -150,10 +152,10 @@ var t = numOfAppear ([2, 4, 7, 8, 7, 7, 1], 7);
 console.log(t)
 
 
-
 // Write a program that calculates the sum of odd elements of a given array.
 
 function sumOdd(a) {
+    
     var sum = 0;
 
     for (var i = 0; i < a.length; i++) {
@@ -165,3 +167,41 @@ function sumOdd(a) {
 
 var e = sumOdd([7, 1, 4, 2]);
 console.log(e)
+
+
+/* Write a program that calculates the number of appearances of a letter a in a
+given string. Modify the program so it calculates the number of both letters a and
+A. */
+
+function numOfAppear(arr) {
+    
+    var result = 0;
+
+    for (var i = 0; i < arr.length; i++) {
+        if (arr[i] === "a" || arr[i] === "A" ) {
+            result += 1;
+            }
+        } return result
+    }
+
+    var h = numOfAppear("ahkAajkzgaA");
+    console.log(h)
+
+
+/* Write a program that concatenates a given string given number of times. For
+example, if “abc” and 4 are given values, the program prints out abcabcabcabc. */
+
+function concatString(string, a) {
+
+    var result = "";
+
+    while (a > 0) {
+        result += string;
+        a--;
+    } return result
+    } 
+
+var u = concatString("abc", 4);
+console.log(u)
+
+
