@@ -106,7 +106,7 @@ function horChart (a, b, c) {
         output += "*";
     }
             return output
-        }
+}
 
 var g = horChart(4, 11, 7);
 console.log(g)
@@ -128,3 +128,40 @@ function numOfDigits(a) {
 
   var f = numOfDigits(6398657);
   console.log(f)
+
+
+  /* Write a program that calculates a number of appearances of a given number in a
+given array.
+Inputs: a = [2, 4, 7, 8, 7, 7, 1], e = 7
+Result: 3  
+*/
+
+function numOfAppear(a, e) {
+    var result = 0;
+
+    for (var i = 0; i < a.length; i++) {
+        if (a[i] === e) {
+        result += 1;
+        }
+    } return result
+}
+
+var t = numOfAppear ([2, 4, 7, 8, 7, 7, 1], 7);
+console.log(t)
+
+
+
+// Write a program that calculates the sum of odd elements of a given array.
+
+function sumOdd(a) {
+    var sum = 0;
+
+    for (var i = 0; i < a.length; i++) {
+        if (a[i] % 2 === 1) {
+            sum += a[i];
+        }
+    } return sum
+}
+
+var e = sumOdd([7, 1, 4, 2]);
+console.log(e)
