@@ -115,10 +115,21 @@ var d = symmetryCheck([2, 4, -2, 7, -2, 4, 2]);
 console.log(d)
 
 
-/* 7. Write a program that intertwines two arrays. You can assume the arrays are of the same
-length.
+/* 7. Write a program that intertwines two arrays. You can assume the arrays are of the same length.
 Input arrays: [4, 5, 6, 2], [3, 8, 11, 9]
 Output array: [4, 3, 5, 8, 6, 11, 2, 9] */
+
+function arrayIntertwine(arr1, arr2) {
+    var arr3 = [];
+    for (var i = 0; i < arr1.length; i++) {
+        arr3[arr3.length] = arr1[i];
+        arr3[arr3.length] = arr2[i];
+    } 
+    return arr3
+}
+
+var p = arrayIntertwine([4, 5, 6, 2], [3, 8, 11, 9]);
+console.log(p)
 
 
 /* 8. Write a program that concatenates two arrays.
