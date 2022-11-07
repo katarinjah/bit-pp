@@ -124,3 +124,91 @@ function convertToArray (string) {
 var r = convertToArray ("My random string");
 console.log(r)
 
+
+/* 8. Write a function that accepts a number as a parameter and checks if the number is prime or not. 
+Note: A prime number (or a prime) is a natural number greater than 1 that has no positive divisors other than 1 and itself. */
+
+function checkIfPrime(n) {
+    var prime = true;
+    var divider = 2;
+    while ( divider < n ) {
+        if (n % divider === 0)  {
+            prime = false
+            }
+        divider = divider + 1
+    }
+    return prime;
+}
+ 
+var y = checkIfPrime(7);
+console.log(y)
+
+
+/* 9. Write a function that replaces spaces in a string with provided separator. If separator is not provided, use “-” (dash) as the default separator.
+
+    "My random string", "_" -> "My_random_string"
+    "My random string", "+" -> "My+random+string"
+    "My random string" -> "My-random-string"  */
+
+    function replaceSpace(str1, sep) {
+        var str2 = "";
+        for (var i = 0; i < str1.length; i++) {
+          var x = str1[i] === " " ? sep : str1[i];
+          str2 += x;
+        } 
+        return str2;
+    }
+
+      var z = replaceSpace("My Random String", "-");
+      console.log(z)
+
+ 
+// 10.  Write a function to get the first n characters and add “...” at the end of newly created string.
+
+
+
+/* 11. Write a function that converts an array of strings into an array of numbers. Filter out all non-numeric values.
+["1", "21", undefined, "42", "1e+3", Infinity] -> [1, 21, 42, 1000]  
+
+function convertToNumArray(arr) {
+    var i = -1,
+        length = arr ? arr.length : 0,
+        index = -1,
+        result = [];
+
+    while (index++ < length) {
+        var value = arr[index];
+        parseint(value);
+        result[++index] = value;
+        }
+    return result;
+}
+
+var f = convertToNumArray(["1", "21", undefined, "42", "1e+3", Infinity]);
+console.log(f);
+
+*/
+  
+/* 12. Write a function to calculate how many years there are left until retirement based on the year of birth. Retirement for men is at age of 65 and for women at age of 60. If someone is already retired, a proper message should be displayed.  */
+
+
+
+
+/* 13. Write a function to humanize a number (formats a number to a human-readable string) with the correct suffix such as 1st, 2nd, 3rd or 4th.
+1 -> 1st
+11 -> 11th  */
+
+function humanize(n) {
+    if(n % 100 >= 11 && n % 100 <= 13)
+        return n + "th";
+    
+    switch(n % 10) {
+        case 1: return n + "st";
+        case 2: return n + "nd";
+        case 3: return n + "rd";
+    }
+    return n + "th";
+}
+
+var d = humanize(1);
+console.log(d)
