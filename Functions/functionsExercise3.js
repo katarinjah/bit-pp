@@ -78,12 +78,24 @@ console.log(t)
 */
 
 /* 5. Write a function to get the last element of an array. Passing a parameter "n"; will return the
-last "n"; elements of the array.
+last "n"; elements of the array. 
 
 [7, 9, 0, -2] -> -2
-[7, 9, 0, -2], 2 -> [0, -2]
+[7, 9, 0, -2], 2 -> [0, -2]   
 
-*/
+function lastElement(arr, n) {
+  if (typeof(n) === "undefined") {
+    var output = arr[arr.length-1]
+  } else {
+    output = [arr.length-n]
+  }
+  return output
+}
+
+var z = lastElement([7, 9, 0, -2]);
+console.log(z)
+
+ */
 
 /* 6. Write a function to create a specified number of elements with pre-filled numeric value
 array.
