@@ -1,20 +1,25 @@
 /* 1. Write a program to insert a string within a string at a particular position (default is 1,
 beginning of a string).
 "My random string", "JS" -> "JS My random string"
-"My random string", "JS", 10 -> "My random JS string" 
+"My random string", "JS", 10 -> "My random JS string" */
 
 function insertString(str1, str2, p) {
-    var newstr = [];
-    for (var i = 0; i < str1.length; i++) {
-       
-    return newstr
-}
+  if (!p) {
+    p = 1;
+  }
+  var output = "";
+  for (var i = 0; i < str1.length; i++) {
+    if (i === p - 1) {
+      output += str2
+    }
+    output += str1[i]
+  }
+  return output
 }
 
 var b = insertString("My random string", "JS", 10);
 console.log(b)
 
-*/
 
 /* 2. Write a program to join all elements of the array into a string skipping elements that are
 undefined, null, NaN or Infinity.
@@ -57,45 +62,45 @@ console.log(t)
 
 
 /* 4. Write a function that reverses a number. The result must be a number.
-12345 -> 54321 // Output must be a number 
+12345 -> 54321 // Output must be a number */
 
 function numReverse(n) {
-    n = n + "";
-    for (var i = 0, j = n.length - 1; i <= j; i++, j--) {
-        n[i] += n[j]
-        } 
-        
-    if (typeof(n) === "number") {
-        return n
-    } else 
-    return  "Invalid input."
+  var b = "" + n, f = "";
+  if (typeof n !== "number") {
+    return "Invalid input."
+  } 
+  for (var i = 0, j = b.length; i < b.length; i++, j--) {
+      f += j;
+  }
+  var m = parseInt(f);
+  return m
 }
 
-   
 var t = numReverse(12345);
 console.log(t)
 
-*/
 
 /* 5. Write a function to get the last element of an array. Passing a parameter "n"; will return the
 last "n"; elements of the array. 
 
 [7, 9, 0, -2] -> -2
-[7, 9, 0, -2], 2 -> [0, -2]   
+[7, 9, 0, -2], 2 -> [0, -2]   */
 
 function lastElement(arr, n) {
+  var arr2 = [], output = [];
   if (typeof(n) === "undefined") {
-    var output = arr[arr.length-1]
-  } else {
-    output = [arr.length-n]
+    return arr[arr.length-1]
+  } 
+  for (var i = n; i > 0; i--) {
+    output[output.length] = arr[i]
   }
   return output
 }
 
-var z = lastElement([7, 9, 0, -2]);
+var z = lastElement([7, 9, 0, -2], 2);
 console.log(z)
 
- */
+
 
 /* 6. Write a function to create a specified number of elements with pre-filled numeric value
 array.

@@ -25,24 +25,22 @@ console.log(o)
 
 /* 2. Use the following array to make a new one by dividing its values by two and adding 5. If a given element's value is 0, change it to 20.
 Input:  [ 3, 500, -10, 149, 53, 414, 1, 19 ]
-Output: [ 6.5, 255, 20, 79.5, 31.5, 212, 5.5, 14.5 ] 
+Output: [ 6.5, 255, 20, 79.5, 31.5, 212, 5.5, 14.5 ]  */
 
 function arrayManipulation(arr1) {
     var arr2 = [];
     for (var i = 0; i < arr1.length; i++) {
-        if (arr1[i] === 0) {
-            arr2[i] += 20
+        if (arr1[i] <= 0) {
+            arr2[arr2.length] = 20
         } else {
-            arr2[i] = arr1[i] / 2 + 5;
+            arr2[arr2.length] = arr1[i] / 2 + 5;
         }
-       arr2[arr2.length] += arr1[i];
     }
-    return arr2
+   return arr2
 }
 
 var d = arrayManipulation([ 3, 500, -10, 149, 53, 414, 1, 19 ]);
 console.log(d)
-*/
 
 
 /* 3. Initialize two arrays. The first one should contain student names, the second one the number of points for each student. Display students' names with their corresponding grade. Use the following ranges:

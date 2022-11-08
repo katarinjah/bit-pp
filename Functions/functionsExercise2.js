@@ -165,33 +165,55 @@ console.log(y)
  
 // 10.  Write a function to get the first n characters and add “...” at the end of newly created string.
 
+function firstCharacters(string, n) {
+    var output = "";
+    if (n > string.length) return "'n' exceeds the string length.";
+        for (var i = 0; i < n; i++) {
+        output += string[i]
+    }
+    return output + "..."
+}
+
+var a = firstCharacters("hahaha", 3);
+console.log(a)
 
 
 /* 11. Write a function that converts an array of strings into an array of numbers. Filter out all non-numeric values.
-["1", "21", undefined, "42", "1e+3", Infinity] -> [1, 21, 42, 1000]  
+["1", "21", undefined, "42", "1e+3", Infinity] -> [1, 21, 42, 1000]  */
 
 function convertToNumArray(arr) {
-    var i = -1,
-        length = arr ? arr.length : 0,
-        index = -1,
-        result = [];
-
-    while (index++ < length) {
-        var value = arr[index];
-        parseint(value);
-        result[++index] = value;
+    var arr2 = [];
+   for (var i = 0; i < arr.length; i++) {
+        var e = parseFloat(arr[i]);
+        if (isFinite(e)) {
+            arr2[arr2.length] = e
         }
-    return result;
+    } 
+    return arr2
 }
 
 var f = convertToNumArray(["1", "21", undefined, "42", "1e+3", Infinity]);
 console.log(f);
 
-*/
   
 /* 12. Write a function to calculate how many years there are left until retirement based on the year of birth. Retirement for men is at age of 65 and for women at age of 60. If someone is already retired, a proper message should be displayed.  */
 
+function retirement(gender, age) {
+    if (gender === "male" && age >= 65) {
+        return "Already retired."
+    }
+    if (gender === "female" && age >= 60) {
+        return "Already retired."
+    }
+    if (gender === "male") {
+        return 65 - age
+    }
+    if (gender === "female")
+        return 60 - age
+}
 
+var v = retirement("female", 30);
+console.log(v)
 
 
 /* 13. Write a function to humanize a number (formats a number to a human-readable string) with the correct suffix such as 1st, 2nd, 3rd or 4th.
