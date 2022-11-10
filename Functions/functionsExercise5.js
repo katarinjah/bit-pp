@@ -1,31 +1,35 @@
 /* 1. Find the min and max element in the following array and switch their places. Print out the modified array in the console.
 Input:  [ 3, 500, 12, 149, 53, 414, 1, 19 ]
-Output: [ 3, 1, 12, 149, 53, 414, 500, 19 ] 
+Output: [ 3, 1, 12, 149, 53, 414, 500, 19 ] */
 
 function switchMinMax(array) {
     var min = array[0], max = array[0], newarray = [];
-
-    for (var i = 0; i < array.length; i++) {
-        if (array[i] < min) {
-           min = array[i]
-        } 
-        if (array[i] > max) {
-            max = array[i]
+        for (var i = 0; i < array.length; i++) {
+            if (min > array[i]) {
+                min = array[i]
+            } 
+            if (max < array[i]) {
+                max = array[i]
+            }
+            var el = array[i];
+            if (array[i] === max) {
+                el = max
+            }
+            if (array[i] === min) {
+                el = min
+            }
+            newarray[newarray.length] = el
         }
-        newarray.indexOf[min] += newarray.indexOf[max]
-        
-    } 
-    return newarray
+        return newarray
 } 
 
 var o = switchMinMax([ 3, 500, 12, 149, 53, 414, 1, 19 ]);
 console.log(o)
-*/
 
 
 /* 2. Use the following array to make a new one by dividing its values by two and adding 5. If a given element's value is 0, change it to 20.
 Input:  [ 3, 500, -10, 149, 53, 414, 1, 19 ]
-Output: [ 6.5, 255, 20, 79.5, 31.5, 212, 5.5, 14.5 ]  */
+Output: [ 6.5, 255, 20, 79.5, 31.5, 212, 5.5, 14.5 ] */
 
 function arrayManipulation(arr1) {
     var arr2 = [];
@@ -202,18 +206,19 @@ console.log(d)
 /* 12. Write a program that calculates the greatest common divisor of two integers. Note: The greatest common divisor of two non-zero integers is the greatest positive number that divides both numbers with no remainder.
 Input:  192 42 | 81 9
 Output: 6      | 9   
+*/
 
 function greatestDivisor(a, b) {
-    var output = 1;
-    for (var i = 1; i <= a && i <= b; i++) {
+    var output = 0;
+    var length = a >= b ? b : a;
+    for (var i = 1; i <= length; i++) {
         if (a % i === 0 && b % i === 0) {
-            output += i
+            output = i
     }
-    return output
 }
+return output
 }
 
 var t = greatestDivisor(192, 42);
 console.log(t)
 
-*/

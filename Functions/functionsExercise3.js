@@ -21,6 +21,7 @@ var b = insertString("My random string", "JS", 10);
 console.log(b)
 
 
+
 /* 2. Write a program to join all elements of the array into a string skipping elements that are
 undefined, null, NaN or Infinity.
 [NaN, 0, 15, false, -22, "", undefined, 47, null] */
@@ -65,17 +66,17 @@ console.log(t)
 12345 -> 54321 // Output must be a number */
 
 function numReverse(n) {
-  var b = "" + n, f = "";
-  if (typeof n !== "number") {
-    return "Invalid input."
-  } 
-  for (var i = 0, j = b.length; i < b.length; i++, j--) {
-      f += j;
-  }
-  var m = parseInt(f);
-  return m
-}
-
+    var b = "" + n, f = "";
+    if (typeof n !== "number") {
+      return "Invalid input."
+    } 
+    for (var i = 0, j = b.length; i < b.length; i++, j--) {
+        f += j;
+    }
+    var m = parseInt(f);
+    return m
+    }
+  
 var t = numReverse(12345);
 console.log(t)
 
@@ -84,7 +85,7 @@ console.log(t)
 last "n"; elements of the array. 
 
 [7, 9, 0, -2] -> -2
-[7, 9, 0, -2], 2 -> [0, -2]   */
+[7, 9, 0, -2], 2 -> [0, -2]    */
 
 function lastElement(arr, n) {
   var arr2 = [], output = [];
@@ -101,12 +102,26 @@ var z = lastElement([7, 9, 0, -2], 2);
 console.log(z)
 
 
-
 /* 6. Write a function to create a specified number of elements with pre-filled numeric value
 array.
 6, 0 -> [0, 0, 0, 0, 0, 0]
 2, "none" -> ["none", "none"]
 2 -> [null, null]  */
+
+function numElements(a, b) {
+  var t = [];
+  for (var i = 0; i < a; i++) {
+    if (typeof b === "undefined") {
+      t[t.length] = null
+    } else {
+      t[t.length] = b;
+    }
+  }
+  return t
+}
+
+var f = numElements(6, 0);
+console.log(f)
 
 
 // 7. Write a function that says whether a number is perfect. 
@@ -126,24 +141,39 @@ function perfectNum(n) {
 
 /* 8. Write a function to find a word within a string.
 'The quick brown fox', 'fox' -> "'fox' was found 1 times"
-'aa bb cc dd', 'aa' -> "'aa' was found 2 times" 
+'aa bb cc dd', 'aa' -> "'aa' was found 2 times"  */
 
-function findWord(string, word) {
-    var output = "", num = 1;
-
-    for (var i = 0; i < string.length; i++) {
-        if (word[i] !== 0) {
-            num++;
-            output = word + " was found " + num + " times"
+function findWord(sentence, word) {
+    var arrSentence = [];
+    var count = 0;
+    arrSentence[0] = "";
+    var times = 0;
+    var output = "";
+    for (var i = 0; i < sentence.length; i++) {
+      if (sentence[i] === " " || sentence[i] === ",") {
+        count++;
+        arrSentence[count] = "";
+      } else {
+        arrSentence[count] += sentence[i];
+      }
     }
+    for (var j = 0; j < arrSentence.length; j++) {
+      if (arrSentence[j] === word) {
+         times++
+      }
+    } 
+    if (times > 1) {
+      output = " times"
+    } else {
+      output = " time"
     }
-    return output
-}
-
-var c = findWord("What a lovely day a day a day", "day");
+    return word + " was found " + times + output  
+  }
+  
+   
+var c = findWord("The quick brown fox", "fox");
 console.log(c)
 
-*/
 
 /* 9. Write a function to hide email address.
 "myemailaddress@bgit.rs" -> "mye...@bgit.rs" */

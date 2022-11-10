@@ -203,5 +203,3 @@ function concatString(string, a) {
 
 var u = concatString("abc", 4);
 console.log(u)
-
-
