@@ -13,10 +13,10 @@ function arrayConvert(array) {
       }
     }
     return output
-  }
+}
 
-  var u = arrayConvert(["1", "21", undefined, "42", "1e+3", Infinity]);
-  console.log(u)
+var u = arrayConvert(["1", "21", undefined, "42", "1e+3", Infinity]);
+console.log(u)
 
 
 /* 2. Write a program to join all elements of the array into a string skipping elements that are undefined, null, NaN or Infinity.
@@ -30,9 +30,9 @@ function joinToString(array) {
         if (isFinite(array[i]) === true && array[i] !== null) {
           output += array[i]
         }
-      }
-      return output
     }
+  return output
+}
 
 var o = joinToString([NaN, 0, 15, false, -22, "", undefined, 47, null]);
 console.log(o);
@@ -49,9 +49,9 @@ function filterFalsyOut(array) {
         if (!!array[i]) {
           output[output.length] = array[i]
         }
-      }
-      return output
     }
+  return output
+}
 
 var l = filterFalsyOut([NaN, 0, 15, false, -22, '', undefined, 47, null]);
 console.log(l)
@@ -59,37 +59,38 @@ console.log(l)
 
 /* 4. Write a program that calculates a number of integer values in the array.
 Input: [NaN, 23.1, 15, false, -22.5, '', 4, 7, null]
-Output: 3  
+Output: 3 */
 
 function countIntegers(array) {
-    var output = 0;
-    for (var i = 0; i < array.length; i++) {
-        output = output + parseInt(array[i]);
-        }
-        return output
-    }
-   
+  var output = [];
+  for (var i = 0; i < array.length; i++) {
+      if (parseInt(array[i]) === array[i]) {
+        output[output.length] = array[i]
+      } 
+  }
+  return output.length
+}
+       
 var e = countIntegers([NaN, 23.1, 15, false, -22.5, '', 4, 7, null]);
 console.log(e)
-*/
 
 
 /* 5. Write a program that calculates a number of float values in the array.
 Input: [NaN, 23.1, 15, false, -22.5, '', 4, 7, null]
-Output: 2 
+Output: 2 */
 
 function countFloats(array) {
-    var output = 0;
-    for (var i = 0; i < array.length; i++) {
-        output = output + parseFloat(array[i]);
-        }
-        return output
-    }
-   
-var e = calcIntegers([NaN, 23.1, 15, false, -22.5, '', 4, 7, null]);
-console.log(e)
-
-*/
+  var output = [];
+  for (var i = 0; i < array.length; i++) {
+      if (typeof array[i] === "number" && array[i] !== parseInt(array[i]) && isNaN(array[i]) === false) {
+        output[output.length] = array[i]
+      } 
+  }
+  return output.length
+}
+       
+var d = countFloats([NaN, 23.1, 15, false, -22.5, '', 4, 7, null]);
+console.log(d)
 
 
 
