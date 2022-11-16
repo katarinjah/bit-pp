@@ -135,6 +135,13 @@ console.log(l)
 /* 9. Write a function to find the median element of array. 
 
 function findMedian(array) {
+    var i = 0, middle = 0, newarray = []; min = 0; result = 0;
+    for (i = 0; i < array.length; i++) {
+        if (min < array[i]) {
+            min = array[i]
+        }
+        newarray[newarray.length] = array[i]
+    } console.log(newarray)
 }
 
 var w = findMedian([5, 7, 9, 3, 60]);
@@ -143,4 +150,59 @@ console.log(w)
 */
 
 
+// 10. Write a function to find the element that occurs most frequently. 
+
+function mostFrequent(array) {
+    var i = 0, j = 0, element = 0, mostFrequent = 0, result = 0;
+    for (i = 0; i < array.length; i++) {
+        for (j = 0; j < array.length; j++) {
+            if (array[i] === array[j]) {
+                element++
+            }
+            if (mostFrequent < element) {
+                mostFrequent = element;
+                result = array[i];
+            }
+        }
+    }
+    return result;
+}
+
+var k = mostFrequent([1, 2, 6, 8, 3, 2, 9, 2]);
+console.log(k)
+
+
+/* Write a function to find and return the first, middle and last element of an array if the array has odd number of elements. If number of elements is even, return just the first and the last. In other cases (empty array), input array should be returned. 
+
+function returnElements(array) {
+    var i = 0, first, middle, last, newarray = [];
+    for (i = 0; i < array.length; i++) {
+       if (array.length === 0) {
+        return array
+       }
+    }
+}
+       
+       
+       /* () if (array.length % 2 === 0) {
+            return array[0] + array[array.length-1];
+        }
+    }
+}
+      if (array.length % 2 === 1) {
+        first = array[0];
+        middle = (array.length + 1) / 2;
+        last = array[array.length-1];
+        newarray[newarray.length] = first + middle + last;
+        }
+    
+    }
+    return newarray;
+}
+
+
+var x = returnElements([9, 8, 6, 2, 5]);
+console.log(x)
+
+*/
 
