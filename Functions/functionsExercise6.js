@@ -31,22 +31,22 @@ console.log(t)
 
 
 /* 3. Write a function that rotates a list by k elements.
-For example [1,2,3,4,5,6] rotated by two becomes [3,4,5,6,1,2] 
+For example [1,2,3,4,5,6] rotated by two becomes [3,4,5,6,1,2] */
 
 function listRotate(array, k) {
-    var output = [];
-    for (var i = 0; i <= k; i++) {
-        if (array[i] === k) {
-            k += array[0];
-            
-        }    
-    }
+    var output = [], i, j;
+    for (i = k, j = k - array.length; i < array.length + k; i++, j++) {
+        if (array[i] !== undefined) {
+            output[output.length] = array[i];
+        } else {
+            output[output.length] = array[j];
+        }
+    }    
     return output;
-}
-
-var p = listRotate([1,2,3,4,5,6], 2);
+} 
+    
+var p = listRotate([1, 2, 3, 4, 5, 6], 4);
 console.log(p)
-*/
 
 
 /* 4. Write a function that takes a number and returns array of its digits. */
@@ -64,20 +64,23 @@ var e = digits(4163454);
 console.log(e)
 
 
-/* 5. Write a program that prints a multiplication table for numbers up to 12. 
+// 5. Write a program that prints a multiplication table for numbers up to 12. 
 
-function multiply12() {
-    var result = 1, output = "";
-    for (var i = 1, number = 1; i <= 12, number <= 12; i++, number++) {
-        result = number * i;
-        output = number + " * " + i + " = " + result;
+function multiply12(number) {
+    var result = 1, output = "", i, j;
+    if (number <= 12) {
+        for (i = 1; i <= number; i++) {
+            for (j = 1; j <= number; j++) {
+            result = i * j;
+            output += result + " ";
+            }
+        }
     }
     return output;
 }
 
-var v = multiply12();
+var v = multiply12(12);
 console.log(v)
-*/
 
 
 // 6. Write a function to input temperature in Centigrade and convert to Fahrenheit.
@@ -114,40 +117,45 @@ console.log(u)
 /* 8. Write a function to find the maximum and minimum elements. Function returns an array.
 
 function findMinMax(array) {
-    var i = 0, min = array[0], max = array[0], output = [];
-        for (i = 0; i < array.length; i++) {
-            if (min > array[i]) {
-                min = array[i]
-            } 
-            if (max < array[i]) {
-                max = array[i]
-            }
-            output[output.length] = 
+    var i, min = 0, max = 0, result; newarray = [];
+    for (var i = 0; i < array.length; i++) {
+        if (array[0] > array[1]) {
+            max = array[0];
+            min = array[1];
+        } else {
+            max = array[1];
+            min = array[0];
         }
-        return output;
-} 
+ 
+        for (i = 2; i < array.length; i++) {
+            if (array[i] > max) {
+                max = array[i];
+            } else if (array[i] < min) {
+                min = array[i];
+            }
+        }
+        newarray[newarray.length] = array[i];
+    }
+    return newarray;
+}
 
 var l = findMinMax([12, 89, 3, 9, 54, 63723]);
 console.log(l)
-
 */
 
-/* 9. Write a function to find the median element of array. 
+
+/* 9. Write a function to find the median element of array. */
 
 function findMedian(array) {
-    var i = 0, middle = 0, newarray = []; min = 0; result = 0;
-    for (i = 0; i < array.length; i++) {
-        if (min < array[i]) {
-            min = array[i]
-        }
-        newarray[newarray.length] = array[i]
-    } console.log(newarray)
+    var i, j, result;
+    for (i = 0, j = array.length - 1; i <= j; i++, j--) {
+        result = (array[i] + array[j]) / 2;
+    }
+    return result;
 }
 
 var w = findMedian([5, 7, 9, 3, 60]);
 console.log(w)
-
-*/
 
 
 // 10. Write a function to find the element that occurs most frequently. 
@@ -172,7 +180,7 @@ var k = mostFrequent([1, 2, 6, 8, 3, 2, 9, 2]);
 console.log(k)
 
 
-/* Write a function to find and return the first, middle and last element of an array if the array has odd number of elements. If number of elements is even, return just the first and the last. In other cases (empty array), input array should be returned. 
+/* 11. Write a function to find and return the first, middle and last element of an array if the array has odd number of elements. If number of elements is even, return just the first and the last. In other cases (empty array), input array should be returned. 
 
 function returnElements(array) {
     var i = 0, first, middle, last, newarray = [];
@@ -203,6 +211,42 @@ function returnElements(array) {
 
 var x = returnElements([9, 8, 6, 2, 5]);
 console.log(x)
-
 */
 
+
+
+/* 12. Write a function to find the average of N elements. Make the function flexible to receive
+dynamic number or parameters. */
+
+
+
+// 13. Write a function to find all the numbers greater than the average.
+
+
+
+/* 14. The body mass index (BMI) is the ratio of the weight of a person (in kilograms) to the
+square of the height (in meters). Write a function that takes two parameters, weight and
+height, computes the BMI, and prints the corresponding BMI category:
+● Starvation: less than 15
+● Anorexic: less than 17.5
+● Underweight: less than 18.5
+● Ideal: greater than or equal to 18.5 but less than 25
+● Overweight: greater than or equal to 25 but less than 30
+● Obese: greater than or equal to 30 but less than 40
+● Morbidly obese: greater than or equal to 40 */
+
+
+
+/* 15. Write a function that takes a list of strings and prints them, one per line, in a rectangular
+frame.:
+For example the list [&quot;Hello&quot;, &quot;World&quot;, &quot;in&quot;, &quot;a&quot;, &quot;frame&quot;] gets
+printed as:
+*********
+* Hello *
+* World *
+* in *
+* a *
+* frame *
+
+*********
+*/
