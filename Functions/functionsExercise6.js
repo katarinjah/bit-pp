@@ -114,7 +114,7 @@ var u = findMax([1, 5, 800, 13, 90, "a", "fsdfs"]);
 console.log(u)
 
 
-/* 8. Write a function to find the maximum and minimum elements. Function returns an array.
+/* 8. Write a function to find the maximum and minimum elements. Function returns an array. 
 
 function findMinMax(array) {
     var i, min = 0, max = 0, result; newarray = [];
@@ -134,12 +134,12 @@ function findMinMax(array) {
                 min = array[i];
             }
         }
-        newarray[newarray.length] = array[i];
+        newarray[newarray.length] = min + max;
     }
     return newarray;
 }
 
-var l = findMinMax([12, 89, 3, 9, 54, 63723]);
+var l = findMinMax([12, 89, 3, 9, 54, 637]);
 console.log(l)
 */
 
@@ -192,7 +192,7 @@ function returnElements(array) {
 }
        
        
-       /* () if (array.length % 2 === 0) {
+       () if (array.length % 2 === 0) {
             return array[0] + array[array.length-1];
         }
     }
@@ -207,21 +207,44 @@ function returnElements(array) {
     }
     return newarray;
 }
-
-
 var x = returnElements([9, 8, 6, 2, 5]);
 console.log(x)
 */
-
-
+  
 
 /* 12. Write a function to find the average of N elements. Make the function flexible to receive
 dynamic number or parameters. */
 
+function average(array) {
+    var i, sum = 0;
+    for (i = 0; i < array.length; i++) {
+        sum += array[i];
+    }
+    return sum / array.length;
+}
+
+var m = average([2, 5, 7, 3, 1, 6]);
+console.log(m)
 
 
 // 13. Write a function to find all the numbers greater than the average.
 
+function greaterThanAvg(array) {
+    var i, sum = 0, average, newarray = [];
+    for (i = 0; i < array.length; i++) {
+        sum += array[i];
+    }
+    for (i = 0; i < array.length; i++) {
+        average = sum / array.length;
+        if (array[i] > average) {
+            newarray[newarray.length] = array[i];        
+        }
+    }
+    return newarray;
+}
+
+var t = greaterThanAvg([2, 5, 7, 3, 1, 6]);
+console.log(t)
 
 
 /* 14. The body mass index (BMI) is the ratio of the weight of a person (in kilograms) to the
@@ -235,11 +258,40 @@ height, computes the BMI, and prints the corresponding BMI category:
 ● Obese: greater than or equal to 30 but less than 40
 ● Morbidly obese: greater than or equal to 40 */
 
+function BMI(weight, height) {
+    var result, output;
+    result = weight / (height * height);
+    if (result < 15) {
+        output = "Starvation"
+    }
+    if (result < 17.5) {
+        output = "Anorexic"
+    }
+    if (result < 18.5) {
+        output = "Underweight"
+    }
+    if (result >= 18.5 && result < 25){
+        output = "Ideal"
+    }
+    if (result >= 25 && result < 30) {
+        output = "Overweight"
+    }
+    if (result >= 30 && result < 40) {
+        output = "Obese"
+    }
+    if (result >= 40) {
+        output = "Morbidly obese"
+    }
+    return output
+}
+ 
+var b = BMI(57, 1.63);
+console.log(b)
 
 
 /* 15. Write a function that takes a list of strings and prints them, one per line, in a rectangular
 frame.:
-For example the list [&quot;Hello&quot;, &quot;World&quot;, &quot;in&quot;, &quot;a&quot;, &quot;frame&quot;] gets
+For example the list ["Hello", "World", "in", "a", "frame"] gets
 printed as:
 *********
 * Hello *
@@ -247,6 +299,24 @@ printed as:
 * in *
 * a *
 * frame *
-
 *********
+
+
+function frameText(array) {
+    var i, j, output = "";
+    for (i = 0; i < array.length; i++) {
+        for (j = 0; j < array.length; j++) {
+            if (i === 0 || i === array.length - 1 || j === 0 || j === array.length - 1) {
+                output += "*" + array[i] + "*";
+            } else {
+                output += " ";
+            }
+        }
+    }
+    return output
+}
+
+var x = frameText(["Hello", "World", "in", "a", "frame"]);
+console.log(x)
+
 */

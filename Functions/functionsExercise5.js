@@ -85,7 +85,7 @@ function grades(names,points) {
   return output
 }
 
-var c = grades([ "Micahel", "Anne", "Frank", "Joe", "John", "David", "Mark", "Bill" ], [ 50, 39, 63, 72, 99, 51, 83, 59 ]);
+var c = grades([ "Michael", "Anne", "Frank", "Joe", "John", "David", "Mark", "Bill" ], [ 50, 39, 63, 72, 99, 51, 83, 59 ]);
 console.log(c)
 
 
