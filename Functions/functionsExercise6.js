@@ -114,7 +114,7 @@ var u = findMax([1, 5, 800, 13, 90, "a", "fsdfs"]);
 console.log(u)
 
 
-/* 8. Write a function to find the maximum and minimum elements. Function returns an array. 
+/* 8. Write a function to find the maximum and minimum elements. Function returns an array. */
 
 function findMinMax(array) {
     var i, min = 0, max = 0, result; newarray = [];
@@ -134,14 +134,14 @@ function findMinMax(array) {
                 min = array[i];
             }
         }
-        newarray[newarray.length] = min + max;
+        
     }
-    return newarray;
+    return [min, max];
 }
 
 var l = findMinMax([12, 89, 3, 9, 54, 637]);
 console.log(l)
-*/
+
 
 
 /* 9. Write a function to find the median element of array. */
@@ -180,37 +180,24 @@ var k = mostFrequent([1, 2, 6, 8, 3, 2, 9, 2]);
 console.log(k)
 
 
-/* 11. Write a function to find and return the first, middle and last element of an array if the array has odd number of elements. If number of elements is even, return just the first and the last. In other cases (empty array), input array should be returned. 
+/* 11. Write a function to find and return the first, middle and last element of an array if the array has odd number of elements. If number of elements is even, return just the first and the last. In other cases (empty array), input array should be returned. */
 
 function returnElements(array) {
-    var i = 0, first, middle, last, newarray = [];
-    for (i = 0; i < array.length; i++) {
-       if (array.length === 0) {
-        return array
-       }
+    var first = array[0], middle = (array.length + 1), last = array[array.length-1];
+    if (array.length % 2 === 1) {
+        return [first, middle, last];
+    }
+    if (array.length % 2 === 0) {
+        return [first, last];
+    }
+    if (array.length === 0) {
+        return array;
     }
 }
-       
-       
-       () if (array.length % 2 === 0) {
-            return array[0] + array[array.length-1];
-        }
-    }
-}
-      if (array.length % 2 === 1) {
-        first = array[0];
-        middle = (array.length + 1) / 2;
-        last = array[array.length-1];
-        newarray[newarray.length] = first + middle + last;
-        }
-    
-    }
-    return newarray;
-}
+   
 var x = returnElements([9, 8, 6, 2, 5]);
 console.log(x)
-*/
-  
+
 
 /* 12. Write a function to find the average of N elements. Make the function flexible to receive
 dynamic number or parameters. */
