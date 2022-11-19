@@ -183,18 +183,21 @@ console.log(k)
 /* 11. Write a function to find and return the first, middle and last element of an array if the array has odd number of elements. If number of elements is even, return just the first and the last. In other cases (empty array), input array should be returned. */
 
 function returnElements(array) {
-    var first = array[0], middle = (array.length + 1), last = array[array.length-1];
-    if (array.length % 2 === 1) {
-        return [first, middle, last];
-    }
-    if (array.length % 2 === 0) {
-        return [first, last];
-    }
+    var i, j, newarray = [array[0]];
     if (array.length === 0) {
         return array;
     }
+    if (array.length % 2 === 0) {
+        newarray[1] = array[array.length - 1];
+    }
+    for (i = 1, j = array.length -2; i <= j; i++, j--) {
+        if (array[i] !== array[j]) continue;
+        newarray[newarray.length] = array[i];
+        newarray[newarray.length] = array[array.length - 1];
+    }
+    return newarray
 }
-   
+    
 var x = returnElements([9, 8, 6, 2, 5]);
 console.log(x)
 
@@ -307,3 +310,5 @@ var x = frameText(["Hello", "World", "in", "a", "frame"]);
 console.log(x)
 
 */
+
+
