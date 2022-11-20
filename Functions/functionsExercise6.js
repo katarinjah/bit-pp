@@ -1,3 +1,5 @@
+"use strict";
+
 /* 1. Write a function to count vowels in a provided string. Vowels are a, e, i, o, and u as well as A,
 E, I, O, and U. */
 
@@ -19,7 +21,7 @@ console.log(x)
 [‘a’,’b’,’c’], [1,2,3] -> [‘a’,1,’b’,2,’c’,3]  */
 
 function alternateElements(arr1, arr2) {
-    var output = [], i = 0;
+    var output = [], i, j;
     for (i = 0, j = 0; i < arr1.length, j < arr2.length; i++, j++) {
         output += arr1[i] + arr2[i];
     }
@@ -117,7 +119,7 @@ console.log(u)
 /* 8. Write a function to find the maximum and minimum elements. Function returns an array. */
 
 function findMinMax(array) {
-    var i, min = 0, max = 0, result; newarray = [];
+    var i, min = 0, max = 0, result, newarray = [];
     for (var i = 0; i < array.length; i++) {
         if (array[0] > array[1]) {
             max = array[0];
@@ -290,25 +292,59 @@ printed as:
 * a *
 * frame *
 *********
+*/
 
-
-function frameText(array) {
-    var i, j, output = "";
+var convert = function(array) {
+    var i, counter = 0, newarray = [], testarray = [];
+    newarray[0] = "";
     for (i = 0; i < array.length; i++) {
-        for (j = 0; j < array.length; j++) {
-            if (i === 0 || i === array.length - 1 || j === 0 || j === array.length - 1) {
-                output += "*" + array[i] + "*";
-            } else {
-                output += " ";
+      if (array[i] === " " || array[i] === ",") {
+        counter++;
+        newarray[counter] = "";
+      } else {
+        newarray[counter] += array[i];
+      }
+    }
+    for (i = 0; i < newarray.length; i++) {
+      if (newarray[i] === "") continue;
+      testarray[testarray.length] = newarray[i];
+    }
+    return testarray;
+}
+  
+var generate = function (text) {
+    var i, side = "* ";
+    for (i = 0; i < text; i++) {
+      side += "*";
+    }
+    side += " *\n";
+    return side
+}
+  
+var frameText = function (string) {
+  var i, j, length, text, word = "* ", element;
+    text = typeof string === "string" ? convertStringToArr(string) : string;
+    length = text.length - 1;
+   
+    var line = generate(text.length);
+        for (i = 0; i < text.length; i++) {
+            for (j = 0; j < text.length; j++) {
+                element = typeof text[i][j] === "undefined" ?  " " : text[i][j];
+                word += element;
+                if (j === length) {
+                    word += " *\n";
+                    if (i === length && j === length) {
+                        word += "";
+                    } else {
+                        word += "* ";
+                    }
+                }
             }
         }
-    }
-    return output
+    return line + word + line;
 }
 
-var x = frameText(["Hello", "World", "in", "a", "frame"]);
-console.log(x)
-
-*/
+var d = frameText(["Hello", "World", "in", "a", "frame"]);
+console.log(d)
 
 
