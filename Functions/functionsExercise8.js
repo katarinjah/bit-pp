@@ -52,7 +52,7 @@ Output: 20 */
                 output += string[i] 
             }
         }
-        console.log(output, count);
+        console.log(output + ", " + count);
     }) ("prograMming")
 
  
@@ -84,21 +84,22 @@ password is correct or invalid.
 Input: JSGuru
 Output: Your password is invalid!
 Input: JSGuru123
-Output: Your password is cool! 
+Output: Your password is cool! */
 
 function checkIfValidPw(string, cb1, cb2) {
+    var result;
     for (var i = 0; i < string.length; i++) {
-        if (typeof string[i] === "number" && string.length > 5) {
-            return cb1();
-        } else {
-            return cb2();
+        if (string.length < 6) {
+            result = cb2();
+        } else if (/[0-9]/.test(string)) {
+            result = cb1(); 
         }
     }
-}
+    return result;
+ }
 
 var m = checkIfValidPw("JSGuru123", function successCallback() {return "Your password is cool!"}, function errorCallback() {return "Your password is invalid!"});
 console.log(m)
-*/
 
 
 /* 7. Write a function that filters elements of the given array so that they satisfy a condition
