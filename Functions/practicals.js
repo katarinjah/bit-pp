@@ -46,14 +46,14 @@ Output: “Good morning” */
 
 function insertCharacter(string, character, position) {
     if (!position) {
-      position = 1;
+        position = 1;
     }
     var output = "";
     for (var i = 0; i < string.length; i++) {
-      if (i === position - 1) {
-        output += character;
-      }
-      output += string[i]
+        if (i === position - 1) {
+            output += character;
+        }
+        output += string[i]
     }
     return output
 }
@@ -64,60 +64,55 @@ console.log(b)
 
 /* 4. Write a function that deletes a character from the given position in the string. 
 Input: “Goodd morning!”, 3 
-Output: “Good morning!”  
+Output: “Good morning!”  */
 
-function deleteCharacter(string, position) {
+function deleteCharacter (string, position, cb) {
     var result = "";
     for (var i = 0; i < string.length; i++) {
-        var e = string[i];
-    if(position === string.indexOf(e)) {
-        delete string[i];
+        if (!cb(i, position)) {
+            result += string[i];
+        }
     }
-    result = string;
-    } 
-    return result
+    return result;
 }
 
-var w = deleteCharacter("Goodd morning!", 3);
-console.log(w)
-*/
+var w = deleteCharacter("Goodd morning!", 3, function (index, position) {return index === position});
+console.log(w);
 
 
 /* 5. Write a function that deletes every second element of the given array.
 Input: [3, 5, 1, 8, 90, -4, 23, 1, 67]
-Output: [3, 1, 90, 23, 67] 
+Output: [3, 1, 90, 23, 67] */
 
-function deleteEverySecond(array) {
-    for (var i = 0, j = i + 1; i < array.length, j < array.length; i++, j++) {
-        if (array.indexOf(i) === j) {
-        delete array[i];
+function deleteEverySecond(array, cb) {
+    var newArray = [];
+    for (var i = 0; i < array.length; i++) {
+        if (cb(i)) {
+        newArray[newArray.length] = array[i];
         }
     } 
-    return array;
-}
-
-var w = deleteEverySecond([3, 5, 1, 8, 90, -4, 23, 1, 67]);
-console.log(w)
-*/
-
-/* 6. Write a function that replaces the elements of the given array between two positions with their doubled values. 
-Input: [3, 5, 1, 8, 90, -4, 23, 1, 67], 2, 6 
-Output: [3, 5, 2, 16, 180, -8, 46, 1, 67] 
-
-function replaceAndDouble(array, position1, position2) {
-    var newArray = [], result = [];
-    for (var i = 0; i < array.length; i++) {
-        if (position1 < array.indexOf([i]) && array.indexOf([i]) < position2) {
-            array[i] = array[i] * 2;
-        }
-        newArray[newArray.length] = array[i];
-    }
     return newArray;
 }
 
-var r = replaceAndDouble ([3, 5, 1, 8, 90, -4, 23, 1, 67], 2, 6);
+var w = deleteEverySecond([3, 5, 1, 8, 90, -4, 23, 1, 67], function(e) {return e % 2 === 0});
+console.log(w)
+
+
+/* 6. Write a function that replaces the elements of the given array between two positions with their doubled values. 
+Input: [3, 5, 1, 8, 90, -4, 23, 1, 67], 2, 6 
+Output: [3, 5, 2, 16, 180, -8, 46, 1, 67] */
+
+function replaceAndDouble(array, position1, position2, cb) {
+    for (var i = 0; i < array.length; i++) {
+        if (cb(i, position1, position2)) {
+            array[i] = array[i] * 2;
+        }
+    }
+    return array;
+}
+
+var r = replaceAndDouble ([3, 5, 1, 8, 90, -4, 23, 1, 67], 2, 6, function(e, position1, position2) {return e >= position1 && e <= position2});
 console.log(r)
-*/
 
 
 /* 7. Write a function that checks if every element of the first array is contained in the second array. Be careful with repetitions! 
