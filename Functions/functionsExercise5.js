@@ -3,27 +3,22 @@ Input:  [ 3, 500, 12, 149, 53, 414, 1, 19 ]
 Output: [ 3, 1, 12, 149, 53, 414, 500, 19 ] */
 
 function switchMinMax(array) {
-    var min = array[0], max = array[0], newarray = [];
-        for (var i = 0; i < array.length; i++) {
-            if (min > array[i]) {
-                min = array[i]
-            } 
-            if (max < array[i]) {
-                max = array[i]
-            }
-            var el = array[i];
-            if (array[i] === max) {
-                el = max
-            }
-            if (array[i] === min) {
-                el = min
-            }
-            newarray[newarray.length] = el
+    var min = array[0], max = array[0], indexMin = 0, indexMax = 0;
+    for (var i = 0; i < array.length; i++) {
+        if (i === 0 || array[i] < min) {
+            min = array[i];
+            indexMin = i;
+        } else if (i === 0 || array[i] > max) {
+            max = array[i];
+            indexMax = i;
         }
-        return newarray
-} 
+    }
+    array[indexMin] = max;
+    array[indexMax] = min;
+    return array;
+}
 
-var o = switchMinMax([ 3, 500, 12, 149, 53, 414, 1, 19 ]);
+var o = switchMinMax([3, 500, 12, 149, 53, 414, 1, 19]);
 console.log(o)
 
 

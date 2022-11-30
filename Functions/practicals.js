@@ -138,38 +138,20 @@ console.log(g)
 Input: [‘apple’, ‘tea’,  ‘amazing’, ‘morning’, ‘JavaScript’]
 Output: [‘morning’, ‘apple’, ‘tea’, ‘JavaScript’, ‘amazing’] 
 
-function checkA(array) {
-    var newArray = [], result = 0;
-    for (var i = 0; i < array.length; i++) {
-        for (j = 0; j < array[i].length; j++) {
-            if (array[j] === "a" || array[j] === "A") {
-                result++;
+function sortArrayByA(array) {
+    var temp = [], count = 0;
+    for (var i = 0, j = 0; i < array.length, j < array[i][j].length; i++, j++) {
+            if (array[i][j] === "a" || array[i][j] === "A") {
+                count++;
             }
-            newArray = array
-        }
     }
-    return newArray, result
+    return count
 }
+    
 
-var t = checkA(["apple", "tea",  "amazing", "morning", "JavaScript"]);
+var t = sortArrayByA(["apple", "tea",  "amazing", "morning", "JavaScript"]);
 console.log(t)
-
-
-function manipulateArray(array) {
-    var output = "";
-
-    for (var i = 0; i < array.length; i++) {
-      if (typeof array[i] !== "number" && array[i].length > 2) {
-        var part = array[i][0] + array[i][1];
-        output += part;
-      }
-    }
-    return output
-  }
-
-  var t = manipulateArray(["apple", "tea",  "amazing", "morning", "JavaScript"]);
-console.log(t)
-*/
+ */
 
 
 /* 9. Write a function that prints out the date of the next day. 
@@ -194,7 +176,7 @@ function printNextDate(day, month, year) {
         nextDay = 1;
         nextMonth = 1;
     }
-    if (month === 2 && day === 29) {
+    if (month === 2 && day === 28) {
         nextMonth = 3;
         nextDay = 1;
     }
@@ -239,18 +221,17 @@ Output:
  	 111  
     	    4
                       4321
-
+                      */
+                    
 
 function printAlignedRight(array) {
-    var output = [], temp = [];
+    var output = [];
     for (var i = 0; i < array.length; i++) {
-        temp += "    " + array[i];
-        output[output.length] = temp;
+        output += "\t" + array[i] + "\n";
     }
     return output
 }
 
 var f = printAlignedRight([78, 111, 4, 4321]);
-console.log(f)
+console.log(f) 
 
-*/
