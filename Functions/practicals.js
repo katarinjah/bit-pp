@@ -136,22 +136,34 @@ console.log(g)
 
 /* 8. Write a function that sorts an array of strings by the number of appearances of the letter ‘a’ or ‘A’. 
 Input: [‘apple’, ‘tea’,  ‘amazing’, ‘morning’, ‘JavaScript’]
-Output: [‘morning’, ‘apple’, ‘tea’, ‘JavaScript’, ‘amazing’] 
+Output: [‘morning’, ‘apple’, ‘tea’, ‘amazing’, ‘JavaScript’] */
 
 function sortArrayByA(array) {
-    var temp = [], count = 0;
-    for (var i = 0, j = 0; i < array.length, j < array[i][j].length; i++, j++) {
-            if (array[i][j] === "a" || array[i][j] === "A") {
-                count++;
+    var numberOfAs = function(string) {
+        var count = 0;
+        for (var i = 0; i < array.length; i++) {
+            if (string[i] === "a" || string[i] === "A") {
+                count += 1;
             }
+        }
+        return count;
     }
-    return count
+
+    for (var i = 0; i < array.length; i++) {
+        for (var j = 0; j < array.length; j++) {
+            if (numberOfAs(array[i]) < numberOfAs(array[j])) {
+                var temp = array[i];
+                array[i] = array[j];
+                array[j] = temp;
+            }
+        }
+    }
+    return array;
 }
     
 
 var t = sortArrayByA(["apple", "tea",  "amazing", "morning", "JavaScript"]);
 console.log(t)
- */
 
 
 /* 9. Write a function that prints out the date of the next day. 
@@ -218,20 +230,31 @@ console.log(k)
 Input: [78, 111, 4, 4321]
 Output: 
   78
- 	 111  
-    	    4
-                      4321
-                      */
+        111
+          4
+       4321 */
                     
 
-function printAlignedRight(array) {
-    var output = [];
+var alignRight = function (array, cb) {
+    var string = "";
     for (var i = 0; i < array.length; i++) {
-        output += "\t" + array[i] + "\n";
+        var transform = "" + array[i];
+        string += cb(transform);
+        string += "\n";
     }
-    return output
-}
+    return string;
+};
+                      
+var x = alignRight([78, 111, 4, 4321], function (transform) {
+        var string = "";
+        for (var i = 0, j = transform.length - 11; i <= 10; i++, j++) {
+            if (i <= 10 - transform.length) {
+                string += " ";
+            } else {
+                string += transform[j];
+            }
+        }
+    return string;
+});
 
-var f = printAlignedRight([78, 111, 4, 4321]);
-console.log(f) 
-
+console.log(x);

@@ -102,21 +102,6 @@ var output = circleCalc(7, function (r) {
 console.log(output);
 
 
-// Example 7
-
-function circleCalc(radius, calculation) {
-    var result = calculation(radius);
-    return result;
-}
- 
-var output = circleCalc(7, function (r) {
-    var PI = 3.14159;
-    return 2 * r * PI;
-    });
- 
-console.log(output);
-
-
 // Example 8
 
 var input = ["one", "1e3", "10e-3", "32", "a15", "12,1"]
@@ -195,6 +180,23 @@ saySomething("Hi")("there");
 
 
 // Example 14
+
+function saySomething(msg1) {
+    function message(msg2) {
+        var output = msg1 + " " + msg2;
+        var result = function () {
+            output += "!";
+            console.log(output);
+        }
+        return result;
+    }
+    return message;
+ }
+ 
+ saySomething("Hi")("there")();
+ 
+
+// Example 15
 
 var myArr = [];
 
