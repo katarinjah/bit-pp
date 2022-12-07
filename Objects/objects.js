@@ -25,33 +25,39 @@ var favMovie = {
 
 /* 3. Write a function that creates an object that represents a project. Each project is described by: description,  programming language, git repository, boolean status that says if the project is in development or not. Add a method that prints out the project's repository,  a method that checks if the project is written in JavaScript as well as a method that checks if the project is in development or not. */
 
-var p = function project (desc, lang, git, dev) {
+var project = function (desc, lang, git, dev) {
     return {
     description: desc,
     programmingLanguage: lang,
     gitRepo: git,
     status: dev,
-    repoInfo: (function() {
-                    return git;
-                }) (),
-    checkLanguage: (function() {
-                if (lang === "JavaScript") {
-                    return "Written in JS";
+    repoInfo: function() {
+                    console.log(this.gitRepo);
+                },
+    checkLanguage: function() {
+                if (this.programmingLanguage === "JavaScript") {
+                    console.log("Written in JS");
                     } else {
-                        return "Not written in JS";
+                        console.log("Not written in JS");
                     }
-                }) (),
-    checkStatus: (function() {
-                    if (dev) {
-                        return "Project is in development";
+                },
+    checkStatus: function() {
+                    if (this.status === true) {
+                        console.log("Project is in development");
                     } else {
-                        return "Project is not in development";
+                        console.log("Project is not in development");
                     }
-                }) ()
+                }
     }
 };
 
-console.log(p("Environment Quality Improval", "PHP", "fsdfdf.github.com", true))
+var output = project("Environment Quality Improval", "PHP", "fsdfdf.github.com", true);
+
+console.log(output);
+
+output.repoInfo();
+output.checkLanguage();
+output.checkStatus();
 
 
 /* 4. Write a function that creates an object that represents a culinary recipe. Each recipe is described by: name, type of cuisine, complexity (value from 1 to 5), list of ingredients, preparing time, preparing instruction. 
@@ -60,41 +66,46 @@ Add a method that checks if a meal can be prepared in under 15 minutes.
 Add a method that changes the type of cuisine to the given value. 
 Add a method that delete a given ingredient from the list of ingredients. */
 
-var makeRecipe = function(dish, type, difficulty, ingredientList, time, instructions) {
-    var recipe = {    
+function createRecipe(dish, type, difficulty, ingredients, time, instructions) {
+    return {  
         dishName: dish,
         typeOfCuisine: type,
         complexity: difficulty,
-        ingredients: ingredientList,
+        ingredientList: ingredients,
         prepTime: time,
         prepInstructions: instructions,
-        necessaryIngredients: (function() {
-            return ingredientList;
-        }) (),
-        preparationTime: (function() {
+        necessaryIngredients: function() {
+            console.log(this.ingredientList);
+        },
+        preparationTime: function() {
             if (time < 0.25) {
-                return "This meal can be prepared in under 15 minutes."
+                console.log("This meal can be prepared in under 15 minutes.");
             } else {
-                return "This meal requires more than 15 minutes preparation time."
+                console.log("This meal requires more than 15 minutes preparation time.");
             }
-        }) (),
-        newCuisine: (function(newType) {
+        },
+        newCuisine: function(newType) {
             type = newType;
-            return type;
-        }) ("Oldschool"),
-        newIngredients: (function(ingredients, ingredient) {
-            for (var i = 0; i < ingredients.length; i++) {
-                if (ingredients[i] === ingredient) {
-                    delete ingredients[i];
+            console.log(type);
+        },
+        newIngredients: function(ingredient) {
+            var newList = [];
+            for (var i = 0; i < this.ingredientList.length; i++) {
+                if (this.ingredientList[i] !== ingredient) {
+                    newList[newList.length] = this.ingredientList[i];
                 }
             }
-            return ingredients;
-        }) (["Sauerkraut", "Minced meat", "Onions", "Rice"], "Onions")
+            console.log(newList);
+        }     
     }
-    return recipe;
 };
 
- 
-var meal = makeRecipe("Sarma", "Traditional", 3, ["Sauerkraut", "Minced meat", "Onions", "Rice"], 4, "Fry the meat with onions. Add rice. Stuff and roll each cabbage leaf. Let simmer for 4 hours.");
+var meal = createRecipe("Sarma", "Traditional", 3, ["Sauerkraut", "Minced meat", "Onions", "Rice"], 4, "Fry the meat with onions. Add rice. Stuff and roll each cabbage leaf. Let simmer for 4 hours.");
 
-console.log(meal)
+console.log(meal);
+
+meal.necessaryIngredients();
+meal.preparationTime();
+meal.newCuisine("Oldschool");
+meal.newIngredients("Onions");
+
