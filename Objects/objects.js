@@ -25,8 +25,8 @@ var favMovie = {
 
 /* 3. Write a function that creates an object that represents a project. Each project is described by: description,  programming language, git repository, boolean status that says if the project is in development or not. Add a method that prints out the project's repository,  a method that checks if the project is written in JavaScript as well as a method that checks if the project is in development or not. */
 
-var project = function (desc, lang, git, dev) {
-    return {
+var createProject = function (desc, lang, git, dev) {
+    var project = {
     description: desc,
     programmingLanguage: lang,
     gitRepo: git,
@@ -49,9 +49,10 @@ var project = function (desc, lang, git, dev) {
                     }
                 }
     }
+    return project;
 };
 
-var output = project("Environment Quality Improval", "PHP", "fsdfdf.github.com", true);
+var output = createProject("Environment Quality Improval", "PHP", "fsdfdf.github.com", true);
 
 console.log(output);
 
@@ -67,7 +68,7 @@ Add a method that changes the type of cuisine to the given value.
 Add a method that delete a given ingredient from the list of ingredients. */
 
 function createRecipe(dish, type, difficulty, ingredients, time, instructions) {
-    return {  
+    var recipe = {  
         dishName: dish,
         typeOfCuisine: type,
         complexity: difficulty,
@@ -78,15 +79,15 @@ function createRecipe(dish, type, difficulty, ingredients, time, instructions) {
             console.log(this.ingredientList);
         },
         preparationTime: function() {
-            if (time < 0.25) {
+            if (this.prepTime < 0.25) {
                 console.log("This meal can be prepared in under 15 minutes.");
             } else {
                 console.log("This meal requires more than 15 minutes preparation time.");
             }
         },
         newCuisine: function(newType) {
-            type = newType;
-            console.log(type);
+            this.typeOfCuisine = newType;
+            //console.log(this.typeOfCuisine);
         },
         newIngredients: function(ingredient) {
             var newList = [];
@@ -95,9 +96,11 @@ function createRecipe(dish, type, difficulty, ingredients, time, instructions) {
                     newList[newList.length] = this.ingredientList[i];
                 }
             }
-            console.log(newList);
+            this.ingredientList = newList;
+            //console.log(this.ingredientList);
         }     
     }
+    return recipe;
 };
 
 var meal = createRecipe("Sarma", "Traditional", 3, ["Sauerkraut", "Minced meat", "Onions", "Rice"], 4, "Fry the meat with onions. Add rice. Stuff and roll each cabbage leaf. Let simmer for 4 hours.");
