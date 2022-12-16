@@ -191,11 +191,11 @@ console.log(getMax(array))
 /* 7. a. Write a function that checks if a given string is written in all capitals. */
 
 function checkIfCapitals(string) {
-if (string.toUpperCase() === string) {
-    return true;
-} else {
-  return false;
-}
+    if (string.toUpperCase() === string) {
+        return true;
+    } else {
+        return false;
+    }
 }
 
 console.log(checkIfCapitals("fdsfsdfNNDJNC"))
@@ -204,19 +204,54 @@ console.log(checkIfCapitals("fdsfsdfNNDJNC"))
 /* 7. b. Write a function that checks if a given string contains any digits. */
 
 function checkForDigits(string) {
-    return /[0-9]/.test(string)
-  }
+    return /[0-9]/.test(string);
+}
+
 console.log(checkForDigits("gjg7ddfd"))
 
 
 /* 7. c. Write a function that checks if a given string is a valid hexadecimal color. */
 
+function checkIfHexColor(string) {
+    var array = Array.from(string);
+    for (var i = 0; i < array.length; i++) {
+        if (array.length === 7 && array[0] === "#") {
+            if (array[i]=== "A" || array[i]=== "B" || array[i]=== "C" || array[i]=== "D" || array[i]=== "E" || array[i]=== "F" || array[i] >= 0 || array[i] <= 9) {
+                return true;
+            }
+        } else {
+            return false
+        }
+    }
+}
+
+console.log(checkIfHexColor("#33FCFF"))
+
 
 /* 7. d. Write a function that checks if a given number belongs to the interval from 1900 to 2018. */
+
+function checkInterval(number) {
+    if (1900 <= number && number <= 2018) {
+        return true
+    } else {
+        return false
+    }
+}
+
+console.log(checkInterval(1984))
 
 
 /* 7. e. Write a function named validator that returns an object with properties stringValidator, passwordValidator, colorValidator, and yearValidator referencing the functions from a) to d). */
 
+function Validator(string1, string2, string3, number) {
+    this.stringValidator = checkIfCapitals(string1);
+    this.passwordValidator = checkForDigits(string2);
+    this.colorValidator = checkIfHexColor(string3);
+    this.yearValidator = checkInterval(number);
+}
+
+var t = new Validator("fdsfsdfNNDJNC","gjg7ddfd", "#33FCFF", 1984);
+console.log(t)
 
 
 /* 8. Write a function that calculates the number of days to your birthday.
@@ -235,15 +270,33 @@ function calculateDays(birthday, today) {
 console.log(calculateDays(birthday, today) + " days")
 
 
-/* 9. Write a function that for a given departure and arrival time calculates the time the trip takes.
+/* 9. Write a function that for a given departure and arrival time calculates the time the trip takes. 
 	Input: 8:22:13 11:43:22
-	Output: 3 hours 21 minutes 9 seconds 
+	Output: 3 hours 21 minutes 9 seconds */
 
-function calculateTrip(daparture, arrival) {
+function calculateTrip(departure, arrival) {
+    var d = departure.split(":");
+    var a = arrival.split(":");
+    for (var i = 0; i < d.length; i++) {
+        var dep = parseInt(d[i]);   
+    }
+    for (var j = 0; j < a.length; j++) {
+        var arr = parseInt[a[j]];  
+    }
+    var deph = 12 - d[0];
+    var depm = 60 - d[1];
+    var deps = 60 - d[2];
+    var arrh = 12 - a[0];
+    var arrm = 60 - a[1];
+    var arrs = 60 - a[2];
+    var resulth = deph - arrh;
+    var resultm = depm - arrm;
+    var results = deps - arrs;
+    var result = resulth + " hours " + resultm + " minutes " + results + " seconds";
+    return result;
 }
 
-console.log(calculateTrip("8:22:13", "11:43:22"))
-*/
+console.log(calculateTrip("8:22:13", "11:43:22"));
 
 
 /* 10. a. Write a constructor function that creates points in space. Each point in space has
@@ -283,7 +336,7 @@ function generateRandomInt(min, max) {
     return randomNr;
 }
 
-console.log(generateRandomInt(5, 20))
+console.log(generateRandomInt(5, 20));
 console.log(generateRandomInt(50, 100))
 
 
