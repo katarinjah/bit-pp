@@ -68,3 +68,76 @@ function abbreviateString(string) {
 
 abbreviateString("John Snow")
 
+
+/* 6. Write a function that adds string to the left or right of string, by replacing it’s characters.
+'0000', ‘123’, 'l' -> '0123'
+'00000000', ‘123’, 'r' -> '12300000' */
+
+var addString = function (str1, str2, type) {
+    var output = "";
+    var i = 0;
+    if (type === "l") {
+        i = str1.length - str2.length;
+        output = str1.slice(0, i) + str2;
+    }
+    if (type === "r") {
+        i = str2.length - 1;
+        output = str2 + str1.slice(i, -1);
+    }
+    return output;
+};
+
+console.log(addString("0000", "123", "l"))
+
+
+/* 7. Write a function to capitalize the first letter of a string and returns modified string.
+"js string exercises" -> "Js string exercises" */
+
+function capitalize(string) {
+    var first = string.charAt(0);
+    var capitalized = first.toUpperCase() + string.slice(1);
+    return capitalized;
+}
+
+ console.log(capitalize("js string exercises"));
+
+
+ /* 8. Write a function to hide email addresses to protect them from unauthorized users.
+"somerandomaddress@example.com" -> "somerand...@example.com" */
+
+function hideEmail(email) {
+    var avg, splitted, part1, part2;
+    splitted = email.split("@");
+    part1 = splitted[0];
+    avg = part1.length / 2;
+    part1 = part1.substring(0, (part1.length - avg));
+    part2 = splitted[1];
+    return part1 + "...@" + part2;
+};
+
+console.log(hideEmail("somerandomaddress@example.com"));
+
+
+/* 9. Write a program that accepts a string as input and swaps the case of each character. For example, if you input 'The Quick Brown Fox', the output should be 'tHE qUICK bROWN fOX'.
+       var UPPER = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+       var LOWER = 'abcdefghijklmnopqrstuvwxyz';
+"The Quick Brown Fox" -> "tHE qUICK bROWN fOX" */
+
+function swap(string) {
+    var newString = "";
+    for (var i = 0; i < string.length; i++) {
+        if (string[i] === string[i].toLowerCase()) {
+            newString += string[i].toUpperCase();
+        } else {
+            newString += string[i].toLowerCase();
+        }
+    }
+    return newString;
+}
+
+console.log(swap("The Quick Brown Fox"))
+
+
+
+
+
