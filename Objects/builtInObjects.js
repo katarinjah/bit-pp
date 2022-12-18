@@ -283,10 +283,10 @@ function calculateTrip(departure, arrival) {
     for (var j = 0; j < a.length; j++) {
         var arr = parseInt[a[j]];  
     }
-    var deph = 12 - d[0];
+    var deph = 24 - d[0];
     var depm = 60 - d[1];
     var deps = 60 - d[2];
-    var arrh = 12 - a[0];
+    var arrh = 24 - a[0];
     var arrm = 60 - a[1];
     var arrs = 60 - a[2];
     var resulth = deph - arrh;
