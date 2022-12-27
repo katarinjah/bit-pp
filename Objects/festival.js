@@ -17,6 +17,9 @@
         if(!title || !genre || !length) {
             throw new Error("Missing input");
         }
+        if(isNaN(length)) {
+            throw new Error("Please input valid length");
+        }
         if (!(genre instanceof Genre)) {
             throw new Error("Invalid genre");
         }
@@ -38,11 +41,24 @@
             return this.movieList.length;
         }
         this.addMovie = function(movie) {
-            if(!(movie instanceof Movie)) {
-                throw new Error("Invalid input");
-            } 
+            if (!(movie instanceof Movie)) {
+              throw new Error("Invalid input");
+            }
+            var totalLength = this.getTotalLength() + movie.length;
+            if (totalLength > 480) {
+              throw new Error("Total movie length cannot exceed 8 hours");
+            }
+            /*var genreCounter = 0;
+            this.movieList.forEach(function (m) {
+              if (m.genre.name === movie.genre.name) {
+                genreCounter++;
+              }
+            });
+            if (genreCounter > 4) {
+              throw new Error("Limit for genre " + movie.genre.name + " reached");
+            } */
             this.movieList.push(movie);
-        }
+          }
         this.getTotalLength = function() {
             var total = 0;
             this.movieList.forEach(function (movie) {
@@ -68,17 +84,21 @@
         }
         this.name = name;
         this.programList = [];
+        this.maxNumOfMovies = 0;
         this.getTotalNumOfMovies = function() {
             var total = 0;
             this.programList.forEach(function (program) {
-                total += program.getNumOfMovies();
-                });
-              return total;
+              total += program.getNumOfMovies();
+            });
+            return total;
         }
         this.addProgram = function(program) {
             if(!(program instanceof Program)) {
                 throw new Error("Invalid program input");
             }
+            if (this.maxNumOfMovies !== 0 && this.getTotalNumOfMovies() + program.getNumOfMovies() > this.maxNumOfMovies) {
+                throw new Error("Maximum number of movies reached");
+              }
             this.programList.push(program);
         }
         this.getData = function() {
@@ -88,6 +108,13 @@
             })
             return output;
         }  
+        //this.setMaxNumOfMovies = function(number) {
+          //  if(!isNaN(number)) {
+              //  throw new Error("Please input a number")
+           // } else {
+             //   return number;
+           // }
+        //}
     }
 
     function createMovie(title, length, genre) {
@@ -100,24 +127,36 @@
         return new Program(date);
     }
 
-    var sundance = new Festival("Sundance");
+    try {
+        var sundance = new Festival("Sundance");
 
-    var program1 = createProgram("12.30.2022");
-    var program2 = createProgram("12.31.2022");
+        var program3012 = createProgram("12.30.2022");
+        var program3112 = createProgram("12.31.2022");
 
-    var predestination = createMovie("Predestination", 97, "Sci-Fi");
-    var exam = createMovie("Exam", 101, "Mystery");
-    var identity = createMovie("Identity", 90, "Thriller");
-    var machinist = createMovie("The Machinist", 101, "Drama");
+        var predestination = createMovie("Predestination", 97, "Sci-Fi");
+        var exam = createMovie("Exam", 101, "Mystery");
+        //var d1 = createMovie("d1", 54, "Mystery");
+        //var d2 = createMovie("d2", 545, "Mystery");
+        //var d3 = createMovie("d3", 643, "Mystery");
+        //var d4 = createMovie("d4", 656, "Mystery");
+        var identity = createMovie("Identity", 90, "Thriller");
+        var machinist = createMovie("The Machinist", 101, "Drama");
 
-    program1.addMovie(predestination);
-    program1.addMovie(exam);
-    program2.addMovie(identity);
-    program2.addMovie(machinist);
+        program3012.addMovie(predestination);
+        //program3012.addMovie(d1);
+        //program3012.addMovie(d2);
+        //program3012.addMovie(d3);
+        //program3012.addMovie(d4);
+        program3012.addMovie(exam);
+        program3112.addMovie(identity);
+        program3112.addMovie(machinist);
 
-    sundance.addProgram(program1);
-    sundance.addProgram(program2);
+        sundance.addProgram(program3012);
+        sundance.addProgram(program3112);
 
-    console.log(sundance.getData());
+        console.log(sundance.getData()); 
+    } catch(error) {
+        console.log(error.message)
+    }
     
 })()
