@@ -86,7 +86,7 @@
             throw new Error("Payment card inactive");
         };
         if(this.balance === 0) {
-            throw new Error("Not enough funds")
+            throw new Error("Insufficient funds")
         };
         this.getBalance = function(balance) {
             var decBalance = balance.toFixed(2);

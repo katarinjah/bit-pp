@@ -15,6 +15,9 @@
     };
 
     function Seat(seatNumber = Math.floor(Math.random() * 90) + 10, category = "e") {
+        if(isNaN(seatNumber)) {
+            throw new Error("Invalid seat number");
+        };
         this.seatNumber = seatNumber;
         this.category = category;
         this.getData = function() {
@@ -32,7 +35,12 @@
         this.person = person;
         this.seat = seat;
         this.getData = function() {
-            return (this.seat.getData() + ", " + this.person.getData());
+            var category = "economy";
+            if (this.seat.category === "b") {
+                category = "business";
+            };
+            var formattedCategory = category.charAt(0).toUpperCase() + category.slice(1);
+            return (this.seat.seatNumber + ", " + formattedCategory + ", " + this.person.getData());
         };
     };
 
@@ -44,14 +52,40 @@
             if (!(passenger instanceof Passenger)) {
                 throw new Error("Invalid passenger input");
             };
+            if (this.passengers.length > 100) {
+                throw new Error("Flight is full");
+            };
+            for (var i = 0; i < this.passengers.length; i++) {
+                if (this.passengers[i].seat.seatNumber === passenger.seat.seatNumber) {
+                    throw new Error("Seat is already taken");
+                };
+                if (this.passengers[i].person.name === passenger.person.name && this.passengers[i].person.surname === passenger.person.surname) {
+                    this.passengers[i] = passenger;
+                    return passenger;
+                };
+            };
             this.passengers.push(passenger);
         };
         this.getData = function() {
             var flightData = "";
-            flightData += "\t" + this.date.toLocaleDateString("de-DE") + ", " + this.relation + "\n";
+            var cities = this.relation.split("-");
+            var origin = cities[0].trim();
+            var destination = cities[1].trim();
+            var originConsonants = origin.match(/[bcdfghjklmnpqrstvwxyz]/gi);
+            var destinationConsonants = destination.match(/[bcdfghjklmnpqrstvwxyz]/gi);
+            var formattedRelation = (originConsonants[0] + originConsonants[originConsonants.length - 1]
+                    + "-" + destinationConsonants[0] + destinationConsonants[destinationConsonants.length - 1]).toUpperCase();
+            flightData += "\t" + this.date.toLocaleDateString("de-DE") + " " + formattedRelation + "\n";
             this.passengers.forEach(function(passenger) {
                 flightData += "\t\t" + passenger.getData() + "\n";
             });
+            var businessCategoryCount = 0;
+            this.passengers.forEach(function(passenger) {
+                if (passenger.seat.category === "b") {
+                    businessCategoryCount++;
+                }
+            });
+            flightData += "\t\tNumber of business category passengers on this flight: " + businessCategoryCount + "\n";
             return flightData;
         };
     };
@@ -73,7 +107,15 @@
             return total;
         };
         this.getData = function() {
-            var airportData = "Airport: " + this.name + ", total passengers: " + this.getTotalPassengers() + "\n";
+            var businessCategoryCount = 0;
+            this.flights.forEach(function(flight) {
+                flight.passengers.forEach(function(passenger) {
+                    if (passenger.seat.category === "b") {
+                        businessCategoryCount++;
+                    };
+                });
+            });
+            var airportData = "Airport: " + this.name + ", total passengers: " + this.getTotalPassengers() + "\nTotal business category passengers: " + businessCategoryCount + "\n";
             this.flights.forEach(function(flight) {
                 airportData += flight.getData();
             });
