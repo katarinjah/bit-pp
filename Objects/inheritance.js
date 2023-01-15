@@ -26,11 +26,11 @@ Employee.prototype.constructor = Employee;
 
 Employee.prototype.getData = function() {
     console.log(this.name + " " + this.surname + ", " + this.salary)
-}
+};
 
 Employee.prototype.getSalary = function() {
     console.log(this.salary);
-}
+};
 
 Employee.prototype.increaseSalary = function() {
     this.salary = this.salary * 1.1;
