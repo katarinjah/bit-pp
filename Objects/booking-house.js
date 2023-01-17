@@ -10,70 +10,78 @@
         AUSTRALIA: "AU",
     };
 
-    function Country(name, odds, continent) {
-        if(!name || !odds || !continent) {
-            throw new Error("Please fill in valid data")
+    class Country {
+        constructor(name, odds, continent) {
+            if(!name || !odds || !continent) {
+                throw new Error("Please fill in valid data")
+            };
+            this.name = name;
+            this.odds = odds;
+            this.continent = continent;
         };
-        this.name = name;
-        this.odds = odds;
-        this.continent = continent;
     };
   
-    function Person(name, surname, dob) {
-        if(!name || !surname || !dob) {
-            throw new Error("Please provide your info")
+    class Person {
+        constructor(name, surname, dob) {
+            if(!name || !surname || !dob) {
+                throw new Error("Please provide your info")
+            };
+            this.name = name;
+            this.surname = surname;
+            this.dob = new Date(dob);
         };
-        this.name = name;
-        this.surname = surname;
-        this.dob = dob;
-        this.getFullNameAndDob = function() {
+        
+        getFullNameAndDob = function() {
             var dobString = this.dob.toLocaleDateString("en-US", {day: "2-digit", month: "2-digit", year: "2-digit"});
             return this.name + " " + this.surname + " (" + dobString + ")";
         };
     };
   
-    function Player(person, betAmount, country) {
-        if(isNaN(betAmount)) {
-            throw new Error("Invalid amount")
+    class Player extends Person {
+        constructor(name, surname, dob, betAmount, country) {
+            super(name, surname, dob);
+            if(isNaN(betAmount)) {
+                throw new Error("Invalid amount")
+            };
+            if(!(country instanceof Country)) {
+                throw new Error("Invalid country input")
+            };
+            this.betAmount = betAmount;
+            this.country = country;
         };
-        if(!(person instanceof Person)) {
-            throw new Error("Invalid person input")
-        };
-        if(!(country instanceof Country)) {
-            throw new Error("Invalid country input")
-        };
-        this.person = person;
-        this.betAmount = betAmount;
-        this.country = country;
-        this.getPlayerInfo = function() {
+        
+        getPlayerInfo = function() {
             var expectedWinAmount = this.betAmount * this.country.odds;
-            var age = new Date().getFullYear() - this.person.dob.getFullYear();
-            return this.country.name + ", " + expectedWinAmount.toFixed(2) + " eur, " + this.person.name + " " + this.person.surname + ", " + age + " years";
+            var age = new Date().getFullYear() - this.dob.getFullYear();
+            return this.country.name + ", " + expectedWinAmount.toFixed(2) + " eur, " + this.name + " " + this.surname + ", " + age + " years";
         };
     };
       
   
-    function Address(country, city, postalCode, street, number) {
-        this.country = country;
-        this.city = city;
-        this.postalCode = postalCode;
-        this.street = street;
-        this.number = number;
-        this.getFormattedAddress = function() {
+    class Address {
+        constructor(country, city, postalCode, street, number) {
+            this.country = country;
+            this.city = city;
+            this.postalCode = postalCode;
+            this.street = street;
+            this.number = number;
+        };
+        
+        getFormattedAddress = function() {
             return this.street + " " + this.number + ", " + this.postalCode + " " + this.city + ", " + this.country;
         };
     };
   
-    function BettingPlace(address) {
-        if(!(address instanceof Address)) {
-            throw new Error("Invalid address input")
+    class BettingPlace extends Address {
+        constructor(country, city, postalCode, street, number) {
+            super(country, city, postalCode, street, number);
+            this.players = [];
         };
-        this.address = address;
-        this.players = [];
-        this.getPlaceInfo = function() {
-            var street = this.address.street;
-            var postalCode = this.address.postalCode;
-            var city = this.address.city;
+        
+        getPlaceInfo = function() {
+            var street = this.street;
+            var postalCode = this.postalCode;
+            var city = this.city;
             var totalBetAmount = 0;
             for (var i = 0; i < this.players.length; i++) {
                 var player = this.players[i];
@@ -82,7 +90,8 @@
             }
             return street + ", " + postalCode + " " + city + ", sum of all bets: " + totalBetAmount + "eur";
         };
-        this.addPlayer = function(player) {
+
+        addPlayer = function(player) {
             if(!(player instanceof Player)) {
                 throw new Error("Invalid player input");
             };
@@ -90,24 +99,29 @@
         };
     };
   
-    function BettingHouse(competition) {
-        this.competition = competition;
-        this.bettingPlaces = [];
-        this.numberOfPlayers = 0;
-        this.addBettingPlace = function(bettingPlace) {
+    class BettingHouse {
+        constructor(competition) {
+            this.competition = competition;
+            this.bettingPlaces = [];
+            this.numberOfPlayers = 0;
+        };
+        
+        addBettingPlace = function(bettingPlace) {
             if(!(bettingPlace instanceof BettingPlace)) {
                 throw new Error("Invalid place input")
             };
             this.bettingPlaces.push(bettingPlace);
         };
-        this.countTotalNumberOfPlayers = function() {
+        
+        countTotalNumberOfPlayers = function() {
             this.numberOfPlayers = 0;
             for (var i = 0; i < this.bettingPlaces.length; i++) {
                 this.numberOfPlayers += this.bettingPlaces[i].players.length;
             }
             return this.numberOfPlayers;
         };
-        this.displayBettingHouseData = function() {
+        
+        displayBettingHouseData = function() {
             console.log(this.competition + ", " + this.bettingPlaces.length + " betting places, " + this.countTotalNumberOfPlayers() + " bets");
             for (var i = 0; i < this.bettingPlaces.length; i++) {
                 var bettingPlace = this.bettingPlaces[i];
@@ -142,14 +156,12 @@
     };
 
     function createPlayer(name, surname, dob, betAmount, countryName, countryOdds, countryContinent) {
-        var person = new Person(name, surname, new Date(dob));
         var country = new Country(countryName, countryOdds, countryContinent);
-        return new Player(person, betAmount, country);
+        return new Player(name, surname, dob, betAmount, country);
     };
 
     function createBettingPlace(country, city, postalCode, street, number) {
-        var address = new Address(country, city, postalCode, street, number);
-        return new BettingPlace(address);
+        return new BettingPlace(country, city, postalCode, street, number);
     };
 
     try {
