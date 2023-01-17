@@ -3,18 +3,22 @@
 (function () {
     console.log("Hi");
 
-    function Product(name, price, expDate) {
-        if (!name || !price || !expDate) {
-            throw new Error("Invalid data input");
+    class Product {
+        constructor(name, price, expDate) {
+            if (!name || !price || !expDate) {
+                throw new Error("Invalid data input");
+            };
+            this.name = name;
+            this.price = price;
+            this.expDate = new Date(expDate);
         };
-        this.name = name;
-        this.price = price;
-        this.expDate = new Date(expDate);
-        this.getPrice = function(price) {
+        
+        getPrice = function(price) {
             var decNumber = price.toFixed(2);
             return decNumber;
         };
-        this.getProductID = function() {
+        
+        getProductID = function() {
             var number = Math.floor(Math.random() * 100000);
                 if (number < 10000) {
                     number += 10000;
@@ -22,15 +26,18 @@
             return number;
         };
 
-        this.getInfo = function() {
+        getInfo = function() {
             var product = (this.name[0] + this.name[this.name.length-1]).toUpperCase() + this.getProductID();
             return (product + ", " + this.name + ", " + this.getPrice());
         };
     };
 
-    function ShoppingBag() {
-        this.productList = [];
-        this.addProduct = function(product) {
+    class ShoppingBag {
+        constructor() {
+            this.productList = [];
+        };
+        
+        addProduct = function(product) {
             if(!(product instanceof Product)) {
                 throw new Error("Invalid product entry");
             };
@@ -39,7 +46,8 @@
                 this.productList.push(product);
             };
         };
-        this.getAvgPrice = function() {
+        
+        getAvgPrice = function() {
             if (this.productList.length === 0) {
                 throw new Error("Product list is empty");
             };
@@ -50,7 +58,8 @@
             var avgPrice = totalPrice / this.productList.length;
             return avgPrice.toFixed(3);
         };
-        this.getMostExp = function() {
+        
+        getMostExp = function() {
             if (this.productList.length === 0) {
                 throw new Error("Product list is empty");
             };
@@ -62,7 +71,8 @@
             });
             return getMostExp.getInfo();
         };
-        this.getTotalPrice = function() {
+        
+        getTotalPrice = function() {
             if (this.productList.length === 0) {
                 throw new Error("Product list is empty");
             };
@@ -74,21 +84,24 @@
         };
     };
 
-    function PaymentCard(balance, status, validDate) {
-        this.date = new Date(validDate);
-        this.balance = balance;
-        this.status = status;
-        var currentDate = new Date();
-        if (this.date < currentDate) {
-            throw new Error("Payment card expired");
+    class PaymentCard {
+        constructor(balance, status, validDate) {
+            this.date = new Date(validDate);
+            this.balance = balance;
+            this.status = status;
+            var currentDate = new Date();
+            if (this.date < currentDate) {
+                throw new Error("Payment card expired");
+            };
+            if (this.status === "inactive") {
+                throw new Error("Payment card inactive");
+            };
+            if(this.balance === 0) {
+                throw new Error("Insufficient funds")
+            };
         };
-        if (this.status === "inactive") {
-            throw new Error("Payment card inactive");
-        };
-        if(this.balance === 0) {
-            throw new Error("Insufficient funds")
-        };
-        this.getBalance = function(balance) {
+        
+        getBalance = function(balance) {
             var decBalance = balance.toFixed(2);
             return decBalance;
         };

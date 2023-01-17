@@ -3,30 +3,36 @@
 (function () {
     console.log("Hi!");
 
-    function Genre(name) {
-        if(!name) {
-            throw new Error("Genre required");
+    class Genre {
+        constructor(name) {
+            if(!name) {
+                throw new Error("Genre required");
+            }
+            this.name = name;
         }
-        this.name = name;
-        this.getData = function() {
+        
+        getData = function() {
             return (this.name[0] + this.name[this.name.length-1]).toUpperCase();
         }
     }
 
-    function Movie(title, genre, length) {
-        if(!title || !genre || !length) {
-            throw new Error("Missing input");
+    class Movie {
+        constructor (title, genre, length) {
+            if(!title || !genre || !length) {
+                throw new Error("Missing input");
+            }
+            if(isNaN(length)) {
+                throw new Error("Please input valid length");
+            }
+            if (!(genre instanceof Genre)) {
+                throw new Error("Invalid genre");
+            }
+            this.title = title;
+            this.genre = genre;
+            this.length = length;
         }
-        if(isNaN(length)) {
-            throw new Error("Please input valid length");
-        }
-        if (!(genre instanceof Genre)) {
-            throw new Error("Invalid genre");
-        }
-        this.title = title;
-        this.genre = genre;
-        this.length = length;
-        this.getData = function() {
+        
+        getData = function() {
             return (this.title + ", " + this.length + "min, " + this.genre.getData());
         } 
     }
@@ -43,16 +49,20 @@
         return Math.max(...Object.values(numOfGenre));
     }
 
-    function Program(date) {
-        if (!date) {
-            throw new Error("Date missing");
+    class Program {
+        constructor(date) {
+            if (!date) {
+                throw new Error("Date missing");
+            }
+            this.date = new Date(date);
+            this.movieList = [];
         }
-        this.date = new Date(date);
-        this.movieList = [];
-        this.getNumOfMovies = function() {
+        
+        getNumOfMovies = function() {
             return this.movieList.length;
         }
-        this.addMovie = function(movie) {
+        
+        addMovie = function(movie) {
             if (!(movie instanceof Movie)) {
                 throw new Error("Invalid input");
             }
@@ -65,14 +75,16 @@
             };
             this.movieList.push(movie);
         }
-        this.getTotalLength = function() {
+        
+        getTotalLength = function() {
             var total = 0;
             this.movieList.forEach(function (movie) {
                 total += movie.length;
             });
             return total;
         }
-        this.getData = function() {
+        
+        getData = function() {
             var day = this.date.getDate();
             var month = this.date.getMonth() + 1;
             var year = this.date.getFullYear();
@@ -84,24 +96,28 @@
         }
     }
     
-    function Festival(name, maxNumOfMovies) {
-        if(!name) {
-            throw new Error("Invalid name input")
+    class Festival {
+        constructor(name, maxNumOfMovies) {
+            if(!name) {
+                throw new Error("Invalid name input")
+            }
+            this.name = name;
+            this.programList = [];
+            this.maxNumOfMovies = maxNumOfMovies;
+            if (isNaN(this.maxNumOfMovies)) {
+                throw new Error("Please input a number")
+            }
         }
-        this.name = name;
-        this.programList = [];
-        this.maxNumOfMovies = maxNumOfMovies;
-        if (isNaN(this.maxNumOfMovies)) {
-            throw new Error("Please input a number")
-        };
-        this.getTotalNumOfMovies = function() {
+        
+        getTotalNumOfMovies = function() {
             var total = 0;
             this.programList.forEach(function (program) {
                 total += program.getNumOfMovies();
             });
             return total;
         }
-        this.addProgram = function(program) {
+        
+        addProgram = function(program) {
             if (!(program instanceof Program)) {
                 throw new Error("Invalid program input");
             }
@@ -110,7 +126,8 @@
             }
             this.programList.push(program);
         }
-        this.getData = function() {
+        
+        getData = function() {
             var output;
             if (this.getTotalNumOfMovies() === 0) {
                 output = this.name + "\n\t" + "Program to be announced";
