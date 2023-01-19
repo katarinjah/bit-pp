@@ -41,7 +41,7 @@
             }
             var formattedCategory = category.charAt(0).toUpperCase() + category.slice(1);
             return (this.seatNumber + ", " + formattedCategory + ", " + this.person.getData());
-        };
+        }
     };
     
     class Flight {
@@ -81,13 +81,13 @@
                     + "-" + destinationConsonants[0] + destinationConsonants[destinationConsonants.length - 1]).toUpperCase();
             flightData += "\t" + this.date.toLocaleDateString("de-DE") + " " + formattedRelation + "\n";
             this.passengers.forEach(function(passenger) {
-                flightData += "\t\t" + passenger.getData() + "\n";
+                flightData += "\t\t" + " " + passenger.getData() + " " + passenger.person.name + " " + passenger.person.surname + "\n";
             });
             var businessCategoryCount = 0;
             this.passengers.forEach(function(passenger) {
-                if (passenger.seat.category === "b") {
+                if (passenger.category === "b") {
                     businessCategoryCount++;
-                }
+                };
             });
             flightData += "\t\tNumber of business category passengers on this flight: " + businessCategoryCount + "\n";
             return flightData;
@@ -119,7 +119,7 @@
             var businessCategoryCount = 0;
             this.flights.forEach(function(flight) {
                 flight.passengers.forEach(function(passenger) {
-                    if (passenger.seat.category === "b") {
+                    if (passenger.category === "b") {
                         businessCategoryCount++;
                     };
                 });
