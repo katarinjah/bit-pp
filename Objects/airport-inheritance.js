@@ -20,11 +20,11 @@
     class Seat {
         constructor(seatNumber, category) {
             this.seatNumber = seatNumber || Math.floor(Math.random() * 90) + 10;
-            this.category = category || "e";
+            this.category = category || "economy";
         };
         
         getData = function() {
-            return (this.seatNumber + ", " + this.category.toUpperCase());
+            return (this.seatNumber + ", " + this.category.charAt(0).toUpperCase() + this.category.slice(1) + ",");
         };
     };
 
@@ -32,16 +32,14 @@
         constructor(name, surname, seatNumber, category) {
             super(seatNumber, category);
             this.person = new Person(name, surname);
+            if (this.category !== "economy") {
+                this.category = "business";
+            };
         };
     
         getData() { 
-            var category = "economy";
-            if (this.category === "b") {
-                category = "business";
-            }
-            var formattedCategory = category.charAt(0).toUpperCase() + category.slice(1);
-            return (this.seatNumber + ", " + formattedCategory + ", " + this.person.getData());
-        }
+            return (this.seatNumber + ", " + this.category.charAt(0).toUpperCase() + this.category.slice(1) + ", " + this.person.getData());
+        };
     };
     
     class Flight {
@@ -85,7 +83,7 @@
             });
             var businessCategoryCount = 0;
             this.passengers.forEach(function(passenger) {
-                if (passenger.category === "b") {
+                if (passenger.category === "business") {
                     businessCategoryCount++;
                 };
             });
@@ -119,7 +117,7 @@
             var businessCategoryCount = 0;
             this.flights.forEach(function(flight) {
                 flight.passengers.forEach(function(passenger) {
-                    if (passenger.category === "b") {
+                    if (passenger.category === "business") {
                         businessCategoryCount++;
                     };
                 });
