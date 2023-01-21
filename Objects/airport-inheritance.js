@@ -12,7 +12,7 @@
             this.surname = surname;
         };
         
-        getData = function() {
+        getData() {
             return (this.name + " " + this.surname);
         };
     };
@@ -23,7 +23,7 @@
             this.category = category || "economy";
         };
         
-        getData = function() {
+        getData() {
             return (this.seatNumber + ", " + this.category.charAt(0).toUpperCase() + this.category.slice(1) + ",");
         };
     };
@@ -49,7 +49,7 @@
             this.passengers = [];
         };
         
-        addPassenger = function(passenger) {
+        addPassenger(passenger) {
             if (!(passenger instanceof Passenger)) {
                 throw new Error("Invalid passenger input");
             };
@@ -68,7 +68,7 @@
             this.passengers.push(passenger);
         };
         
-        getData = function() {
+        getData() {
             var flightData = "";
             var cities = this.relation.split("-");
             var origin = cities[0].trim();
@@ -98,14 +98,14 @@
             this.flights = [];
         };
         
-        addFlight = function(flight) {
+        addFlight(flight) {
             if (!(flight instanceof Flight)) {
                 throw new Error("Invalid flight input");
             };
             this.flights.push(flight);
         };
         
-        getTotalPassengers = function() {
+        getTotalPassengers() {
             var total = 0;
             this.flights.forEach(function(flight) {
               total += flight.passengers.length;
@@ -113,7 +113,7 @@
             return total;
         };
         
-        getData = function() {
+        getData() {
             var businessCategoryCount = 0;
             this.flights.forEach(function(flight) {
                 flight.passengers.forEach(function(passenger) {

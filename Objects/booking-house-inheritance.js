@@ -31,7 +31,7 @@
             this.dob = new Date(dob);
         };
         
-        getFullNameAndDob = function() {
+        getFullNameAndDob() {
             var dobString = this.dob.toLocaleDateString("en-US", {day: "2-digit", month: "2-digit", year: "2-digit"});
             return this.name + " " + this.surname + " (" + dobString + ")";
         };
@@ -50,7 +50,7 @@
             this.country = country;
         };
         
-        getPlayerInfo = function() {
+        getPlayerInfo() {
             var expectedWinAmount = this.betAmount * this.country.odds;
             var age = new Date().getFullYear() - this.dob.getFullYear();
             return this.country.name + ", " + expectedWinAmount.toFixed(2) + " eur, " + this.name + " " + this.surname + ", " + age + " years";
@@ -67,7 +67,7 @@
             this.number = number;
         };
         
-        getFormattedAddress = function() {
+        getFormattedAddress() {
             return this.street + " " + this.number + ", " + this.postalCode + " " + this.city + ", " + this.country;
         };
     };
@@ -78,7 +78,7 @@
             this.players = [];
         };
         
-        getPlaceInfo = function() {
+        getPlaceInfo() {
             var street = this.street;
             var postalCode = this.postalCode;
             var city = this.city;
@@ -91,7 +91,7 @@
             return street + ", " + postalCode + " " + city + ", sum of all bets: " + totalBetAmount + "eur";
         };
 
-        addPlayer = function(player) {
+        addPlayer(player) {
             if(!(player instanceof Player)) {
                 throw new Error("Invalid player input");
             };
@@ -106,14 +106,14 @@
             this.numberOfPlayers = 0;
         };
         
-        addBettingPlace = function(bettingPlace) {
+        addBettingPlace(bettingPlace) {
             if(!(bettingPlace instanceof BettingPlace)) {
                 throw new Error("Invalid place input")
             };
             this.bettingPlaces.push(bettingPlace);
         };
         
-        countTotalNumberOfPlayers = function() {
+        countTotalNumberOfPlayers() {
             this.numberOfPlayers = 0;
             for (var i = 0; i < this.bettingPlaces.length; i++) {
                 this.numberOfPlayers += this.bettingPlaces[i].players.length;
@@ -121,7 +121,7 @@
             return this.numberOfPlayers;
         };
         
-        displayBettingHouseData = function() {
+        displayBettingHouseData() {
             console.log(this.competition + ", " + this.bettingPlaces.length + " betting places, " + this.countTotalNumberOfPlayers() + " bets");
             for (var i = 0; i < this.bettingPlaces.length; i++) {
                 var bettingPlace = this.bettingPlaces[i];

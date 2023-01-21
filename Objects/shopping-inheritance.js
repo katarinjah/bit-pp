@@ -13,12 +13,12 @@
             this.expDate = new Date(expDate);
         };
         
-        getPrice = function(price) {
+        getPrice(price) {
             var decNumber = price.toFixed(2);
             return decNumber;
         };
         
-        getProductID = function() {
+        getProductID() {
             var number = Math.floor(Math.random() * 100000);
                 if (number < 10000) {
                     number += 10000;
@@ -26,7 +26,7 @@
             return number;
         };
 
-        getInfo = function() {
+        getInfo() {
             var product = (this.name[0] + this.name[this.name.length-1]).toUpperCase() + this.getProductID();
             return (product + ", " + this.name + ", " + this.getPrice());
         };
@@ -37,7 +37,7 @@
             this.productList = [];
         };
         
-        addProduct = function(product) {
+        addProduct(product) {
             if(!(product instanceof Product)) {
                 throw new Error("Invalid product entry");
             };
@@ -47,7 +47,7 @@
             };
         };
         
-        getAvgPrice = function() {
+        getAvgPrice() {
             if (this.productList.length === 0) {
                 throw new Error("Product list is empty");
             };
@@ -59,7 +59,7 @@
             return avgPrice.toFixed(3);
         };
         
-        getMostExp = function() {
+        getMostExp() {
             if (this.productList.length === 0) {
                 throw new Error("Product list is empty");
             };
@@ -72,7 +72,7 @@
             return getMostExp.getInfo();
         };
         
-        getTotalPrice = function() {
+        getTotalPrice() {
             if (this.productList.length === 0) {
                 throw new Error("Product list is empty");
             };
@@ -101,7 +101,7 @@
             };
         };
         
-        getBalance = function(balance) {
+        getBalance(balance) {
             var decBalance = balance.toFixed(2);
             return decBalance;
         };
