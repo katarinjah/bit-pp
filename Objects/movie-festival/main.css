@@ -45,10 +45,17 @@ input, input::placeholder {
 
 #title, #length, #genre, #date, #selectMovie, #selectProgram {
     margin-left: 30px;
-    width: 90%;
 }
 
 label {
     margin-left: 30px;
 }
 
+#title, #length, #date {
+    width: 88.5%;
+}
+
+#movieError, #programError, #addMovieError {
+    color: #F22613;
+    text-weight: bold;
+}
