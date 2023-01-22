@@ -72,7 +72,7 @@ function addProgram() {
 
   //validate input
   if (!dateInputValue) {
-    programErrorElement.textContent = "Please select date.";
+    programErrorElement.textContent = "Please select a date.";
     return;
   };
 
@@ -88,7 +88,7 @@ function addProgram() {
   });
 
   if (hasProgramWithSameDate) {
-    programErrorElement.textContent = "Program for same date already exists.";
+    programErrorElement.textContent = "Program for the same date already exists.";
     return;
   };
 
@@ -113,27 +113,36 @@ function addProgram() {
 
 function addMovieToProgram() {
   //collect data
-  var movieIndex = selectMovieElement.value;
-  var programIndex = selectProgramElement.value;
-
+  var selectedMovieIndex = selectMovieElement.value;
+  var selectedProgramIndex = selectProgramElement.value;
+  
+  var movieToAdd = festival.movieList[selectedMovieIndex];
+  var programToAddTo = festival.programList[selectedProgramIndex];
+  
   //validate inputs
-  if (!movieIndex || !programIndex) {
+  if (!selectedMovieIndex || !selectedProgramIndex) {
     addMovieErrorElement.textContent = "Please select an option from the list.";
     return;
   };
 
+  var movieInProgram = programToAddTo.movieList.find(function(movie) {
+    return movie.title === movieToAdd.title;
+  });
+  
+  if(movieInProgram) {
+    addMovieErrorElement.textContent = "Movie is already in this program.";
+      return;
+  };
+
   addMovieErrorElement.textContent = "";
+  
+  programToAddTo.addMovie(movieToAdd);
+  var programLi = document.querySelector("#program-item-" + selectedProgramIndex);
+  programLi.textContent = programToAddTo.getData();
 
-  var movie = festival.movieList[movieIndex];
-  var program = festival.programList[programIndex];
-
-  program.addMovie(movie);
-
-  var liToUpdateNode = document.querySelector("#program-item-" + programIndex);
-  liToUpdateNode.textContent = program.getData();
-
+  // clear inputs
   selectMovieElement.value = "";
-  selectProgramElement. value = "";
+  selectProgramElement.value = ""; 
 };
 
 createMovieButton.addEventListener("click", addMovie);

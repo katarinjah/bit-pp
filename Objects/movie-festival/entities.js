@@ -3,7 +3,7 @@
 class Movie {
     constructor (title, length, genre) {
         this.title = title;
-        this.length = length;
+        this.length = parseInt(length);
         this.genre = genre;
     };
 
