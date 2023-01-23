@@ -17,9 +17,9 @@ class Student {
     };
 
     getStudentData() {
-        var firstLetter = this.name[0].toUpperCase() + this.name.slice(1);
-        var lastLetter = this.surname[0].toUpperCase() + this.surname.slice(1);
-        return firstLetter + lastLetter;
+        var firstName = this.name[0].toUpperCase() + this.name.slice(1);
+        var lastName = this.surname[0].toUpperCase() + this.surname.slice(1);
+        return firstName + lastName;
     };
 };
 
@@ -34,7 +34,7 @@ class Exam extends Student {
     };
 
     getExamInfo() {
-        return this.subjectName + ", " + this.getStudentData();
+        return this.subjectName + " - " + getStudentData() + "\t\t\t\t" + this.grade;
     };
 
     hasPassed() {

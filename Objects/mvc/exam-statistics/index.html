@@ -12,8 +12,10 @@
         <div id="header">
             <h1>Exam Statistics June</h1>
             <div id="student-count">Total students: <span id="#count">0</span></div>
-            <div id="passed-total">PASSED <span id="passed"></span></div></div>
-            <div id="failed-total">FAILED <span id="failed"></span><span id="percentage-failed"></span></div></div>
+            <div id="stats">
+                <div id="passed-total">PASSED<span id="passed"></span></div></div>
+                <div id="failed-total">FAILED<span id="failed"></span><span id="percentage-failed"></span></div></div>
+            </div>
         </div>
         <div id="form">
             <form>
@@ -41,8 +43,10 @@
                     <option value="ten">10</option>
                 </select>
                 <input type="button" value="add" id="add-entry">
+                <br>
+                <p id="entry-error"></p>
             </form>
-            <p id="entry-error"></p>
+            
         </div>
         <div id="charts">
             <div id="passed-chart">
@@ -55,7 +59,7 @@
             </div>
         </div>
     </div>
-    <script src="./entities.js"></script>
-    <script src="./controller.js"></script>
+    <script src="./js/entities.js"></script>
+    <script src="./js/controller.js"></script>
 </body>
 </html>
