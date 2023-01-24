@@ -8,7 +8,7 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 
-h1, span, #student-count, #passed, #failed, #percentage-failed {
+h1, span, #student-count, #passed-count, #failed-count, #percentage-failed {
     color: white;
 }
 
@@ -54,6 +54,10 @@ h1, span, #student-count, #passed, #failed, #percentage-failed {
     background-color: tomato;
     padding: 10px;
     text-align: left;
+}
+
+#percentage-failed {
+    background-color: #E68364;
 }
 
 #charts {
@@ -119,4 +123,26 @@ li:nth-child(odd) {
     list-style: none;
     text-indent: none;
     margin-left: -8%;
+}
+
+span {
+    display: inline-block;
+}
+
+#passed-count {
+    margin-left: 120px;
+    text-align: right;
+}
+
+#percentage-failed {
+    margin-left: 5px;
+    height: 20px;
+    padding: 4px;
+    width: 40px;
+    text-align: center;
+}
+
+#failed-count {
+    text-align: right;
+    margin-left: 130px;
 }

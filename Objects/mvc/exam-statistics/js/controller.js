@@ -1,89 +1,86 @@
 "use strict";
 
-var chooseSubject = document.querySelector("#subjects");
-var addStudent = document.querySelector("#name");
+// initialize variables for tracking statistics
+var studentCount = 0;
+var passedCount = 0;
+var failedCount = 0;
+
+ // get form elements
+ var chooseSubject = document.querySelector("#subjects");
+ var addStudent = document.querySelector("#name");
+ var addEntry = document.querySelector("#add-entry");
+ var entryError = document.querySelector("#entry-error");
+ var chooseGrade = document.querySelector("#grades");
+
+ // get elements for displaying statistics
 var totalStudentCount = document.querySelector("#count");
-var chooseGrade = document.querySelector("#grades");
-var addEntry = document.querySelector("#add-entry");
-var entryError = document.querySelector("#entry-error");
+var passedCountSpan = document.querySelector("#passed-count");
+var failedCountSpan = document.querySelector("#failed-count");
+var percentageFailed = document.querySelector("#percentage-failed");
+
+// get elements for displaying passed and failed lists
 var passedList = document.querySelector("#passed-list");
 var failedList = document.querySelector("#failed-list");
-var passedTotal = document.querySelector("#passed-total");
-var failedTotal = document.querySelector("#failed-total");
-var percentageFailed = document.querySelector("#percentage-failed");
-var passedCount = document.querySelector("#passed");
-var failedCount = document.querySelector("#failed");
 
+addEntry.addEventListener("click", function(event) {
+    event.preventDefault();
 
-function evaluateStudent() {
     //collect data from user
-    var subjectValue = chooseSubject.value;
-    var studentValue = addStudent.value;
-    var gradeValue = chooseGrade.value;
+    var subject = chooseSubject.value;
+    var student = addStudent.value;
+    var grade = parseFloat(chooseGrade.value);
 
     //validate input
-    if (!subjectValue) {
+    if (!subject) {
         entryError.textContent = "Please select a subject.";
         return;
     };
-    if (!studentValue || !isNaN(studentValue)) {
+    if (!student || !isNaN(student)) {
         entryError.textContent = "Invalid student name input.";
         return;
     };
-
-    /*var space = new RegExp("/^\s+$/");
-    if (!(space.test(studentValue))) {
-        entryError.textContent = "Invalid student name input.";
+    var space = new RegExp(/\s/);
+    if (!space.test(student)) {
+        entryError.textContent = "Please separate name and surname.";
         return;
-    };*/
+    };
 
-    if (!gradeValue) {
+    if (!grade) {
         entryError.textContent = "Please select a grade.";
         return;
     };
     entryError.textContent = "";
 
-    // clear inputs
-    var subjectValue = "";
-    var studentValue = "";
-    var gradeValue = "";
+     // Increment student count
+     studentCount++;
+     totalStudentCount.textContent = studentCount;
 
-    //create exam instance and add it to both lists
-    var exam = new Exam();
-    var examInfo = exam.getExamInfo();
-    totalStudentCount.value = 0;
-   
-    if(exam.hasPassed()) {
-        failedList.push(examInfo);
-        var li = document.createElement("li");
-        li.textContent = exam.getExamInfo();
-        failedList.appendChild(li);
-        failed.value += 1;
-        totalStudentCount++;
+    // create new list item for student
+    var newItem = document.createElement("li");
+    newItem.textContent = subject + " - " + student + "               " + grade;
+
+    // check if student passed or failed
+    if (grade >= 6) {
+        passedCount++;
+        passedCountSpan.textContent = passedCount;
+        passedList.appendChild(newItem);
     } else {
-        passedList.push(examInfo);
-        var li = document.createElement("li");
-        li.textContent = exam.getExamInfo();
-        passedList.appendChild(li);
-        passed.value += 1;
-        totalStudentCount++;
+        failedCount++;
+        failedCountSpan.textContent = failedCount;
+        failedList.appendChild(newItem);
     };
 
-};
+    // calculate percentage of students who failed
+    if(failedCount === 0){
+        failedCountSpan.textContent = "0";
+        percentageFailed.textContent = "0%";
+    } else {
+        var percentage = (failedCount / studentCount) * 100;
+        percentageFailed.textContent = percentage.toFixed(0) + "%";
+    };
 
-function getPercentage() {
-    var result = failedList.length / failed.value;
-    return result + "%";
-};
-
-function getStatistics() {
-
-};
-   
-
-addEntry.addEventListener("click", evaluateStudent);
-addEntry.addEventListener("click", getStatistics);
-addEntry.addEventListener("click", getPercentage); 
-
-
-
+    // clear inputs
+    chooseSubject.value = "";
+    addStudent.value = "";
+    chooseGrade.value = "";
+});
