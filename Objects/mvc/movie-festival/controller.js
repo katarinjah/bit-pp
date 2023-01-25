@@ -140,6 +140,15 @@ function addMovieToProgram() {
   var programLi = document.querySelector("#program-item-" + selectedProgramIndex);
   programLi.textContent = programToAddTo.getData();
 
+  selectProgramElement.textContent = "-";
+
+  festival.programList.forEach(function(program, index) {
+    var newOption = document.createElement("option");
+    newOption.value = index;
+    newOption.textContent = program.getData();
+    selectProgramElement.appendChild(newOption);
+  });
+
   // clear inputs
   selectMovieElement.value = "";
   selectProgramElement.value = ""; 
