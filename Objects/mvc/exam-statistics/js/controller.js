@@ -51,13 +51,21 @@ addEntry.addEventListener("click", function(event) {
     };
     entryError.textContent = "";
 
+     // split student name and surname
+     var student_name = student.split(" ");
+     var initialName = student_name[0];
+     var initialSurname = student_name[1];
+
+     var name = initialName[0].toUpperCase() + initialName.slice(1);
+     var surname = initialSurname[0].toUpperCase() + initialSurname.slice(1);
+
      // Increment student count
      studentCount++;
      totalStudentCount.textContent = studentCount;
 
     // create new list item for student
     var newItem = document.createElement("li");
-    newItem.textContent = subject + " - " + student + "               " + grade;
+    newItem.textContent = subject + " - " + name + " " + surname + "\t\t\t" + grade;
 
     // check if student passed or failed
     if (grade >= 6) {

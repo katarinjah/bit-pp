@@ -60,6 +60,14 @@ h1, span, #student-count, #passed-count, #failed-count, #percentage-failed {
     background-color: #E68364;
 }
 
+#grade-failed {
+    color: tomato;
+}
+
+#grade-passed {
+    color: #2ABB9B;
+}
+
 #charts {
     display: flex;
     margin: auto;
