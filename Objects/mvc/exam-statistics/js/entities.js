@@ -37,7 +37,7 @@ class Exam {
     };
 
     getExamInfo() {
-        return this.subjectName + " - " + this.studentName.getStudentData() + "\t\t\t\t" + this.grade;
+        return this.subjectName + " - " + this.studentName.getStudentData() + " " + this.grade;
     };
 
     hasPassed() {

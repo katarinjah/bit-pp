@@ -59,23 +59,31 @@ addEntry.addEventListener("click", function(event) {
      var name = initialName[0].toUpperCase() + initialName.slice(1);
      var surname = initialSurname[0].toUpperCase() + initialSurname.slice(1);
 
-     // Increment student count
+     // increment student count
      studentCount++;
      totalStudentCount.textContent = studentCount;
 
     // create new list item for student
     var newItem = document.createElement("li");
-    newItem.textContent = subject + " - " + name + " " + surname + "\t\t\t" + grade;
+    newItem.textContent = subject + " - " + name + " " + surname;
 
     // check if student passed or failed
-    if (grade >= 6) {
+    if (grade > 5) {
         passedCount++;
         passedCountSpan.textContent = passedCount;
+        var gradePspan = document.createElement("span");
+        gradePspan.setAttribute("id", "grade-passed");
+        gradePspan.textContent = grade;
         passedList.appendChild(newItem);
+        newItem.appendChild(gradePspan);  
     } else {
         failedCount++;
         failedCountSpan.textContent = failedCount;
+        var gradeFspan = document.createElement("span");
+        gradeFspan.setAttribute("id", "grade-failed");
+        gradeFspan.textContent = grade;
         failedList.appendChild(newItem);
+        newItem.appendChild(gradeFspan); 
     };
 
     // calculate percentage of students who failed
