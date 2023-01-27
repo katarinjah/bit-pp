@@ -7,7 +7,7 @@ class Subject {
 
     getSubjectName() {
         return this.name;
-    }
+    };
 };
 
 class Student {
@@ -37,12 +37,14 @@ class Exam {
     };
 
     getExamInfo() {
-        return this.subjectName + " - " + this.studentName.getStudentData() + " " + this.grade;
+        return this.subjectName.getSubjectName() + " - " + this.studentName.getStudentData();
     };
 
     hasPassed() {
-        if (this.grade.value > 5) {
-            return;
+        if (this.grade > 5) {
+            return true;
+        } else {
+            return false;
         };
     };
 };

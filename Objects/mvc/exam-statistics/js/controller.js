@@ -5,14 +5,14 @@ var studentCount = 0;
 var passedCount = 0;
 var failedCount = 0;
 
- // get form elements
- var chooseSubject = document.querySelector("#subjects");
- var addStudent = document.querySelector("#name");
- var addEntry = document.querySelector("#add-entry");
- var entryError = document.querySelector("#entry-error");
- var chooseGrade = document.querySelector("#grades");
+// get form elements
+var chooseSubject = document.querySelector("#subjects");
+var addStudent = document.querySelector("#name");
+var addEntry = document.querySelector("#add-entry");
+var entryError = document.querySelector("#entry-error");
+var chooseGrade = document.querySelector("#grades");
 
- // get elements for displaying statistics
+// get elements for displaying statistics
 var totalStudentCount = document.querySelector("#count");
 var passedCountSpan = document.querySelector("#passed-count");
 var failedCountSpan = document.querySelector("#failed-count");
@@ -28,7 +28,7 @@ addEntry.addEventListener("click", function(event) {
     //collect data from user
     var subject = chooseSubject.value;
     var student = addStudent.value;
-    var grade = parseFloat(chooseGrade.value);
+    var newGrade = parseFloat(chooseGrade.value);
 
     //validate input
     if (!subject) {
@@ -45,35 +45,40 @@ addEntry.addEventListener("click", function(event) {
         return;
     };
 
-    if (!grade) {
+    if (!newGrade) {
         entryError.textContent = "Please select a grade.";
         return;
     };
     entryError.textContent = "";
 
-     // split student name and surname
-     var student_name = student.split(" ");
-     var initialName = student_name[0];
-     var initialSurname = student_name[1];
+    // split student name and surname
+    var student_name = student.split(" ");
+    var initialName = student_name[0];
+    var initialSurname = student_name[1];
 
-     var name = initialName[0].toUpperCase() + initialName.slice(1);
-     var surname = initialSurname[0].toUpperCase() + initialSurname.slice(1);
+    var name = initialName[0].toUpperCase() + initialName.slice(1);
+    var surname = initialSurname[0].toUpperCase() + initialSurname.slice(1);
 
-     // increment student count
-     studentCount++;
-     totalStudentCount.textContent = studentCount;
+    // create entities
+    var newStudent = new Student(name, surname);
+    var newSubject = new Subject(subject);
+    var newExam = new Exam(newSubject, newStudent, newGrade);
 
-    // create new list item for student
+    // increment student count
+    studentCount++;
+    totalStudentCount.textContent = studentCount;
+
+    // create new list item for each added entry
     var newItem = document.createElement("li");
-    newItem.textContent = subject + " - " + name + " " + surname;
+    newItem.textContent = newExam.getExamInfo();
 
     // check if student passed or failed
-    if (grade > 5) {
+    if (newExam.hasPassed()) {
         passedCount++;
         passedCountSpan.textContent = passedCount;
         var gradePspan = document.createElement("span");
         gradePspan.setAttribute("id", "grade-passed");
-        gradePspan.textContent = grade;
+        gradePspan.textContent = newGrade;
         passedList.appendChild(newItem);
         newItem.appendChild(gradePspan);  
     } else {
@@ -81,7 +86,7 @@ addEntry.addEventListener("click", function(event) {
         failedCountSpan.textContent = failedCount;
         var gradeFspan = document.createElement("span");
         gradeFspan.setAttribute("id", "grade-failed");
-        gradeFspan.textContent = grade;
+        gradeFspan.textContent = newGrade;
         failedList.appendChild(newItem);
         newItem.appendChild(gradeFspan); 
     };
