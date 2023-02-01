@@ -2,28 +2,32 @@
 
 var uiModule = (function() {
 
-    var inputTitleElement = document.querySelector("#title");
-    var inputLengthElement = document.querySelector("#length");
-    var selectGenreElement = document.querySelector("#genre");
-    var movieErrorElement = document.querySelector("#movieError");
-    var addMovieErrorElement = document.querySelector("#addMovieError");
+  var inputTitleElement = document.querySelector("#title");
+  var inputLengthElement = document.querySelector("#length");
+  var selectGenreElement = document.querySelector("#genre");
+  var movieErrorElement = document.querySelector("#movieError");
+  var ulMovieListElement = document.querySelector("#movieList");
 
-    var inputDateElement = document.querySelector("#date");
+  var inputDateElement = document.querySelector("#date");
+  var programErrorElement = document.querySelector("#programError");
+  var ulProgramListElement = document.querySelector("#programList");
 
-    var ulMovieListElement = document.querySelector("#movieList");
-    var ulProgramListElement = document.querySelector("#programList");
-    var selectMovieElement = document.querySelector("#selectMovie");
-    var selectProgramElement = document.querySelector("#selectProgram");
-    var programErrorElement = document.querySelector("#programError");
+  var selectMovieElement = document.querySelector("#selectMovie");
+  var selectProgramElement = document.querySelector("#selectProgram");
+  var addMovieErrorElement = document.querySelector("#addMovieError");
 
-    var collectMovieData = function() {
-        return {
-            titleValue: inputTitleElement.value,
-            lengthValue: inputLengthElement.value,
-            genreValue: selectGenreElement.value,
-        };
+  var collectMovieData = function() {
+    var title = inputTitleElement.value;
+    var length = inputLengthElement.value;
+    var genre = selectGenreElement.value;
+      
+    return {
+      title: title,
+      length: length,
+      genre: genre
     };
-
+  };
+    
     var validateMovie = function() {
         if (!(inputTitleElement.value)) {
             movieErrorElement.textContent = "Title is required!";
@@ -46,69 +50,53 @@ var uiModule = (function() {
         };
     };
 
-    var addMovieToList = function(collectMovieData, obj, index) {
-            var movieDataLi = document.createElement("li");
-            movieDataLi.textContent = collectMovieData;
-            ulMovieListElement.appendChild(movieDataLi);
+    var addMovieToList = function(movie, index) {
+        var movieDataLi = document.createElement("li");
+        movieDataLi.textContent = movie.getData();
+        ulMovieListElement.appendChild(movieDataLi);
 
-            var movieOption = document.createElement("option");
-            movieOption.textContent = inputTitleElement.value;
-            //var index = data.newFestival.movieList.length - 1;
-            movieOption.setAttribute("value", index);
-            selectMovieElement.appendChild(movieOption);
-        };
+        var movieOption = document.createElement("option");
+        movieOption.textContent = movie.title;
+        movieOption.setAttribute("value", index);
+        selectMovieElement.appendChild(movieOption);
+    };
 
-    var clearInputs = function() {
+    var clearMovieInputs = function() {
         inputTitleElement.value = "";
         inputLengthElement.value = "";
         selectGenreElement.value = "";
     };
 
-    var collectProgramData = function(dateInputValue) {
+  var collectProgramData = function() {
         var dateInputValue = inputDateElement.value;
-        return data.createProgram(dateInputValue);
-
-    }
-
-    var createdProgram = function() {
-        var dateInputValue = inputDateElement.value;
-        var newProgram = data.program(dateInputValue);
-        festival.programList.push(newProgram);
-
+        
         return {
-            dateInputValue: dateInputValue,
-            newProgram: newProgram
+        date: dateInputValue
         };
     };
 
     var validateProgram = function() {
-         var dateInputValue = inputDateElement.value;
-
-         if (!dateInputValue) {
-            programErrorElement.textContent = "Please select a date.";
-            return;
-        };
-            
+        var dateInputValue = inputDateElement.value;
         var date = new Date(dateInputValue);
-            
         if (date.getTime() < Date.now()) {
-            programErrorElement.textContent = "Invalid date!";
-            return;
-        };
-            
-        var hasProgramWithSameDate = festival.programList.some(function (program) {
-            return date.getTime() === program.date.getTime();
-        });
-            
-        if (hasProgramWithSameDate) {
-            programErrorElement.textContent = "Program for the same date already exists.";
-            return;
-        };
+        programErrorElement.textContent = "Invalid date!";
+        return false;
+        } else {
         programErrorElement.textContent = "";
+        return true;
+        };
     };
 
-    var updateProgramList = function() {
-        var index = festival.programList.length - 1;
+    function setProgramError(string){
+        programErrorElement.textContent = string;
+        return;
+    };
+
+    var clearProgram = function() {
+        inputDateElement.value = "";
+    };
+
+    var addProgramToList = function(program, index) {
         var li = document.createElement("li");
         li.setAttribute("id", "program-item-" + index);
         li.textContent = program.getData();
@@ -123,55 +111,36 @@ var uiModule = (function() {
     var addMovieToProgram = function() {
         var selectedMovieIndex = selectMovieElement.value;
         var selectedProgramIndex = selectProgramElement.value;
-        
-        var movieToAdd = festival.movieList[selectedMovieIndex];
-        var programToAddTo = festival.programList[selectedProgramIndex];
 
-        programToAddTo.addMovie(movieToAdd);
-        var programLi = document.querySelector("#program-item-" + selectedProgramIndex);
-        programLi.textContent = programToAddTo.getData();
-        selectProgramElement.textContent = "-";
+        return {
+            movie: selectedMovieIndex,
+            program: selectedProgramIndex
+        };
     };
 
-    var validateFestival = function() {
-        if (!selectedMovieIndex || !selectedProgramIndex) {
-            addMovieErrorElement.textContent = "Please select an option from the list.";
-            return;
-        };
-        
-        var movieInProgram = programToAddTo.movieList.find(function(movie) {
-            return movie.title === movieToAdd.title;
-        });
-          
-        if(movieInProgram) {
-            addMovieErrorElement.textContent = "Movie is already in this program.";
-              return;
-        };
-        
+    var setMovieToProgramError = function(string){
+        addMovieErrorElement.textContent = string;
+    };   
+
+    var clearFestivalData = function() {
+        selectMovieElement.value = "";
+        selectProgramElement.value = "";
         addMovieErrorElement.textContent = "";
     };
-
-    var updateProgramData = function() {
-        festival.programList.forEach(function(program, index) {
-            var newOption = document.createElement("option");
-            newOption.value = index;
-            newOption.textContent = program.getData();
-            selectProgramElement.appendChild(newOption);
-        });
-    };
-   
+    
     return {
         collectMovieData: collectMovieData,
-        validateMovie: validateMovie,
-        addMovieToList: addMovieToList,
-        clearInputs: clearInputs, 
         collectProgramData: collectProgramData,
-        validateProgram: validateProgram,
-        createdProgram: createdProgram,
+        setProgramError: setProgramError,
+        addMovieToList: addMovieToList,
         addMovieToProgram: addMovieToProgram,
-        updateProgramList: updateProgramList,
-        updateProgramData: updateProgramData,
-        validateFestival: validateFestival,
+        validateMovie: validateMovie,
+        validateProgram: validateProgram,
+        clearMovieInputs: clearMovieInputs, 
+        clearProgram: clearProgram,
+        addProgramToList: addProgramToList,
+        setMovieToProgramError: setMovieToProgramError,
+        clearFestivalData: clearFestivalData
     };
 
 })();
