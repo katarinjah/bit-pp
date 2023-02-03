@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/main.css">
+    <title>Exam Statistics</title>
+</head>
+<body>
+    <div id="container">
+        <div id="header">
+            <h1>Exam Statistics June</h1>
+            <div id="student-count">Total students: <span id="count">0</span></div>
+            <div id="stats">
+                <div id="passed-total">PASSED<span id="passed-count"></span></div></div>
+                <div id="failed-total">FAILED<span id="failed-count"></span><span id="percentage-failed"></span></div></div>
+            </div>
+        </div>
+        <div id="form">
+            <form>
+                <select id="subjects">
+                    <option value="" disabled selected>Select subject</option>
+                    <option value="JavaScript">JavaScript</option>
+                    <option value="Python">Python</option>
+                    <option value="C++">C++</option>
+                    <option value="Java">Java</option>
+                    <option value="Swift">Swift</option>
+                    <option value="C#">C#</option>
+                </select>
+                <input type="text" id="name" placeholder="Name and surname">
+                <select id="grades">
+                    <option value="" disabled selected>Select grade</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                </select>
+                <input type="button" value="add" id="add-entry">
+                <br>
+                <p id="entry-error"></p>
+            </form>
+            
+        </div>
+        <div id="charts">
+            <div id="passed-chart">
+                <p id="passed-title">PASSED</p>
+                <ul id="passed-list"></ul>
+            </div>
+            <div id="failed-chart">
+                <p id="failed-title">FAILED</p>
+                <ul id="failed-list"></ul>
+            </div>
+        </div>
+    </div>
+    <script src="./js/data.js"></script>
+    <script src="./js/ui.js"></script>
+    <script src="./js/app.js"></script>
+</body>
+</html>
