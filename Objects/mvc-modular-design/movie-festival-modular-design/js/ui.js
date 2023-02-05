@@ -2,31 +2,31 @@
 
 var uiModule = (function() {
 
-  var inputTitleElement = document.querySelector("#title");
-  var inputLengthElement = document.querySelector("#length");
-  var selectGenreElement = document.querySelector("#genre");
-  var movieErrorElement = document.querySelector("#movieError");
-  var ulMovieListElement = document.querySelector("#movieList");
+    var inputTitleElement = document.querySelector("#title");
+    var inputLengthElement = document.querySelector("#length");
+    var selectGenreElement = document.querySelector("#genre");
+    var movieErrorElement = document.querySelector("#movieError");
+    var ulMovieListElement = document.querySelector("#movieList");
 
-  var inputDateElement = document.querySelector("#date");
-  var programErrorElement = document.querySelector("#programError");
-  var ulProgramListElement = document.querySelector("#programList");
+    var inputDateElement = document.querySelector("#date");
+    var programErrorElement = document.querySelector("#programError");
+    var ulProgramListElement = document.querySelector("#programList");
 
-  var selectMovieElement = document.querySelector("#selectMovie");
-  var selectProgramElement = document.querySelector("#selectProgram");
-  var addMovieErrorElement = document.querySelector("#addMovieError");
+    var selectMovieElement = document.querySelector("#selectMovie");
+    var selectProgramElement = document.querySelector("#selectProgram");
+    var addMovieErrorElement = document.querySelector("#addMovieError");
 
-  var collectMovieData = function() {
-    var title = inputTitleElement.value;
-    var length = inputLengthElement.value;
-    var genre = selectGenreElement.value;
-      
-    return {
-      title: title,
-      length: length,
-      genre: genre
+    var collectMovieData = function() {
+        var title = inputTitleElement.value;
+        var length = inputLengthElement.value;
+        var genre = selectGenreElement.value;
+        
+        return {
+        title: title,
+        length: length,
+        genre: genre
+        };
     };
-  };
     
     var validateMovie = function() {
         if (!(inputTitleElement.value)) {
@@ -104,7 +104,7 @@ var uiModule = (function() {
 
         var option = document.createElement("option");
         option.setAttribute("value", index);
-        option.textContent = program.getData();
+        option.textContent = li.textContent;
         selectProgramElement.appendChild(option);
     };
 
