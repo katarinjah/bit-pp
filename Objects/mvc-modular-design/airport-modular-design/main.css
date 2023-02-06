@@ -1,0 +1,41 @@
+body {
+    background-color: #4D8FAC;
+}
+
+.header {
+    margin-top: 20px;
+}
+
+hr {
+    width: 60%;
+    border: 1px solid #044F67;
+    margin: 0 auto;
+}
+
+button {
+    padding: 5px;
+    border-radius: 30%;
+}
+
+div {
+    margin: 35px;
+}
+
+#destination, #name {
+    width: 320px;
+}
+
+input {
+    text-align: center;
+    height: 30px;
+}
+
+#class {
+    width: 120px;
+    height: 30px;
+}
+
+h2, p {
+    color: white;
+    font-weight: bold;
+}
