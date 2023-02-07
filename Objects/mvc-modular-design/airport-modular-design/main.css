@@ -18,16 +18,24 @@ button {
 }
 
 div {
-    margin: 35px;
+    margin: 20px;
 }
 
 #destination, #name {
     width: 320px;
 }
 
+#date {
+    width: 140px;
+}
+
 input {
     text-align: center;
-    height: 30px;
+    height: 30px; 
+}
+
+select {
+    text-align: center;
 }
 
 #class {
@@ -38,4 +46,8 @@ input {
 h2, p {
     color: white;
     font-weight: bold;
+}
+
+#flight-error {
+    color: #9D2933;
 }
