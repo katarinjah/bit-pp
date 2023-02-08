@@ -10,10 +10,8 @@ var appModule = (function (data, ui) {
         var newFlight = flightData.getData();
         var flightId = data.createPassenger();
         ui.displayFlightData(flightData);
-        ui.displayPassengerList(newFlight.addPassenger(flightId));
-        ui.updateTotalPassengerCount(data.getTotalPassengerCount());
-        ui.updateTotalBusinessPassengerCount(data.getTotalBusinessPassengerCount());
-        ui.updateBusinessPassengerCountOnFlight(data.getBusinessPassengerCountOnFlight(flightId));
+        ui.displayPassengerData(collectedData.seat, collectedData.category, collectedData.name);
+        ui.updateCounters(flightData);
         ui.clearInputs();
     };
         

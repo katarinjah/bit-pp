@@ -12,10 +12,6 @@ var dataModule = (function () {
         };
     };
 
-    var createPerson = function(name) {
-        return new Person(name);
-    };
-
     class Seat {
         constructor(seatNumber, category) {
             this.seatNumber = seatNumber || Math.floor(Math.random() * 90) + 10;
@@ -39,6 +35,10 @@ var dataModule = (function () {
         getData() { 
             return (this.seatNumber + ", " + this.category.charAt(0).toUpperCase() + this.category.slice(1) + ", " + this.person.getData());
         };
+    };
+
+    var createPassenger = function(name, seatNumber, category) {
+        return new Passenger(name, seatNumber, category);
     };
 
     class Flight {
@@ -91,6 +91,10 @@ var dataModule = (function () {
         };
     };
 
+    var createFlight = function(relation, date) {
+        return new Flight(relation, date);
+    };
+
     class Airport {
         constructor() {
             this.flights = [];
@@ -128,18 +132,9 @@ var dataModule = (function () {
         };
     };
 
-    var createFlight = function(relation, date) {
-        return new Flight(relation, date);
-    };
-
-    var createPassenger = function(name, seatNumber, category) {
-        return new Passenger(name, seatNumber, category);
-    };
-
     return {
-        createPerson: createPerson,
-        createFlight: createFlight,
         createPassenger: createPassenger,
+        createFlight: createFlight,
     };
 
 })()

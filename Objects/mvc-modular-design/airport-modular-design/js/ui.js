@@ -4,6 +4,7 @@ var uiModule = (function () {
 
     var totalPassengers = document.querySelector("#total-passengers");
     var totalBusinessPassengers = document.querySelector("#total-business-passengers");
+    var flight = document.querySelector(".flight")
     var flightData = document.querySelector("#flight-data");
     var passengerList = document.querySelector("#passenger-list");
     var numOfBusinessOnFlight = document.querySelector("#business-passengers-on-flight");
@@ -53,9 +54,38 @@ var uiModule = (function () {
         };
     };
 
-    var displayFlightData = function(destination, date) {
-        flightData.textContent = "Destination: " + collectFlightData.destination + "  |  Date: " + collectFlightData.date;
+    var displayFlightData = function(collectFlightData) {
+        var day = collectFlightData.date.getDate();
+        var month = collectFlightData.date.getMonth() + 1;
+        var year = collectFlightData.date.getFullYear();
+        var formattedDate = day + "." + month + "." + year;
+        var cities = destinationInfo.value.split(" - ");
+        var origin = cities[0];
+        var destination = cities[1];
+        var originAbbr = origin[0].toUpperCase();
+        function isConsonant(letter) {
+          var vowels = "aeiouAEIOU";
+          return !vowels.includes(letter);
+        };
+        for (var i = origin.length - 1; i >= 0; i--) {
+            if (isConsonant(origin[i])) {
+                originAbbr += origin[i].toUpperCase();
+                break;
+            };
+        };
+        var destinationAbbr = destination[0].toUpperCase();
+        for (var i = destination.length - 1; i >= 0; i--) {
+            if (isConsonant(destination[i])) {
+                destinationAbbr += destination[i].toUpperCase();
+                break;
+            };
+        };
+        var hr = document.createElement("hr");
+        flight.appendChild(hr);
+        var formattedRelation = originAbbr + "-" + destinationAbbr;
+        flightData.textContent = formattedDate + " " + formattedRelation;
     };
+      
 
     var displayPassengerData = function(seat, category, name) {
         var li = document.createElement("li");
@@ -63,31 +93,21 @@ var uiModule = (function () {
         passengerList.appendChild(li);
     };
 
-    var updateTotalPassengerCount = function() {
-        var total = 0;
-        collectFlightData.forEach(function() {
-            total += collectFlightData.name.length;
-        });
-        totalPassengers.textContent = total;
-    };
+    var updateCounters = function(data) {
+        var passengersCount = document.getElementsByTagName("li").length;
+        totalPassengers.textContent = passengersCount;
 
-    var updateTotalBusinessPassengerCount = function() {
-        var total = 0;
-        collectFlightData.forEach(function() {
-            if (collectFlightData.category === "Business") {
-                total++;
+        var businessCategoryCount = 0;
+        for (var i = 0; i < passengersCount; i++) {
+            if (document.getElementsByTagName("li")[i].textContent.includes("Business")) {
+                businessCategoryCount++;
             };
-        });
-        totalBusinessPassengers.textContent = total;
-    };
-
-    var updateBusinessPassengerCountOnFlight = function() {
-        var count = 0;
-        if (collectFlightData.category === "Business") {
-            count++;
         };
-        numOfBusinessOnFlight.textContent = count;
-    };
+        totalBusinessPassengers.textContent = businessCategoryCount;
+
+    }
+
+
 
     var clearInputs = function() {
         destinationInfo.textContent = "";
@@ -102,9 +122,7 @@ var uiModule = (function () {
         validateInputs: validateInputs,
         displayFlightData: displayFlightData,
         displayPassengerData: displayPassengerData,
-        updateTotalPassengerCount: updateTotalPassengerCount,
-        updateTotalBusinessPassengerCount: updateTotalBusinessPassengerCount,
-        updateBusinessPassengerCountOnFlight: updateBusinessPassengerCountOnFlight,
+        updateCounters: updateCounters,
         clearInputs: clearInputs,
     };
 

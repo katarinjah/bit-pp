@@ -29,7 +29,7 @@ div {
     width: 140px;
 }
 
-input {
+input, li {
     text-align: center;
     height: 30px; 
 }
@@ -43,11 +43,17 @@ select {
     height: 30px;
 }
 
-h2, p {
+h2, p, li {
     color: white;
     font-weight: bold;
 }
 
 #flight-error {
     color: #9D2933;
+}
+
+ul {
+    list-style: none;
+    width: 400px;
+    margin: 0 auto;
 }
