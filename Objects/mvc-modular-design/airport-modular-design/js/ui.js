@@ -1,13 +1,10 @@
 "use strict";
 
-var uiModule = (function () {
+var uiModule = (function() {
 
     var totalPassengers = document.querySelector("#total-passengers");
     var totalBusinessPassengers = document.querySelector("#total-business-passengers");
     var flight = document.querySelector(".flight")
-    var flightData = document.querySelector("#flight-data");
-    var passengerList = document.querySelector("#passenger-list");
-    var numOfBusinessOnFlight = document.querySelector("#business-passengers-on-flight");
     var flightError = document.querySelector("#flight-error");
     var destinationInfo = document.querySelector("#destination");
     var dateInput =  document.querySelector("#flight-date");
@@ -32,8 +29,12 @@ var uiModule = (function () {
     };
 
     var validateInputs = function() {
-        if (!destinationInfo.value || !isNaN(destinationInfo.value)) {
-            flightError.textContent = "Please enter origin and destination country.";
+        if (!destinationInfo.value) {
+            flightError.textContent = "Please enter origin and destination.";
+            return false;
+        };
+        if (!isNaN(destinationInfo.value) || destinationInfo.value.indexOf(" - ") === -1) {
+            flightError.textContent = "Invalid input!";
             return false;
         };
         if (!dateInput.value) {
@@ -80,17 +81,21 @@ var uiModule = (function () {
                 break;
             };
         };
-        var hr = document.createElement("hr");
-        flight.appendChild(hr);
         var formattedRelation = originAbbr + "-" + destinationAbbr;
+        var flightData = document.createElement("p");
+        flightData.setAttribute("id", "flight-data");
         flightData.textContent = formattedDate + " " + formattedRelation;
+        flight.appendChild(flightData);
     };
       
 
     var displayPassengerData = function(seat, category, name) {
+        var passengerList = document.createElement("ul");
+        passengerList.setAttribute("id", "passenger-list");
         var li = document.createElement("li");
         li.textContent = "Seat: " + seat + "  |  Class: " + category + "  |  Name: " + name;
         passengerList.appendChild(li);
+        flight.appendChild(passengerList);
     };
 
     var updateCounters = function(data) {
@@ -104,18 +109,15 @@ var uiModule = (function () {
             };
         };
         totalBusinessPassengers.textContent = businessCategoryCount;
-
-    }
-
-
+    };
 
     var clearInputs = function() {
-        destinationInfo.textContent = "";
+        destinationInfo.value = "";
         dateInput.value = "";
         travelClass.value = "Economy";
-        seatNumber.textContent = "";
-        passengerName.textContent = "";
-    }
+        seatNumber.value = "";
+        passengerName.value = "";
+    };
 
     return {
         collectFlightData: collectFlightData,

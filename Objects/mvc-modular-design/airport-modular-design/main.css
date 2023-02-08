@@ -56,4 +56,9 @@ ul {
     list-style: none;
     width: 400px;
     margin: 0 auto;
+    padding-left:0
+}
+
+#flight-data {
+    margin-top: 20px;
 }

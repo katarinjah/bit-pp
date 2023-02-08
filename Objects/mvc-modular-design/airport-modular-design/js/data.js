@@ -133,7 +133,6 @@ var dataModule = (function () {
     };
 
     return {
-        createPassenger: createPassenger,
         createFlight: createFlight,
     };
 
