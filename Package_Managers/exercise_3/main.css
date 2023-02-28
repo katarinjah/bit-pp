@@ -1,0 +1,21 @@
+#header {
+    width: 100%;
+    height: 80%;
+    background-color: tomato;
+}
+
+h3 {
+    padding: 20px;
+    color: white;
+    font-size: 2em;
+    text-align: center;
+}
+
+#posts-container {
+    width: 80%;
+}
+
+.posts {
+    color: white;
+    background-color: grey;
+}
