@@ -1,5 +1,5 @@
 import renderPosts from './ui.js';
 
-document.onload(() => {
+window.onload = () => {
     renderPosts();
-});
+}
