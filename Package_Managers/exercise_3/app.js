@@ -1,6 +1,6 @@
 import { renderPosts } from './ui.js';
 
-window.onload = () => {
+(() => {
     return fetch('http://127.0.0.1:4000/posts')
     .then(function(res){
       return res.json();
@@ -12,5 +12,5 @@ window.onload = () => {
       });
       renderPosts(post);
     });
-}
+})()
   
